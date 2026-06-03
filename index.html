@@ -2569,6 +2569,18 @@
       .lesson-nav-footer { padding: 1.2rem 2.2rem; }
     }
 
+    /* ── Tablet (768px) ── */
+    @media (max-width: 900px) {
+      main { padding: 1.5rem 1.5rem; }
+      .welcome-banner { padding: 1.3rem 1.5rem; gap: 1rem; }
+      .welcome-banner-title { font-size: 1.1rem; }
+      .w-stat-val { font-size: 1.2rem; }
+      .header-title { font-size: 2rem; }
+      .filter-bar { gap: 1rem; }
+      .quiz-active-container { padding: 2rem 1.5rem; }
+      .analytics-summary-cards { grid-template-columns: repeat(3, 1fr); }
+    }
+
     @media (max-width: 1100px) {
       .lessons-layout {
         grid-template-columns: 200px 1fr;
@@ -2638,14 +2650,26 @@
       .welcome-banner {
         flex-direction: column;
         align-items: flex-start;
-        gap: 1rem;
-        padding: 1.1rem 1.1rem;
+        gap: 0.8rem;
+        padding: 1rem;
+        border-radius: 14px;
       }
+      .welcome-banner::after { display: none; }
+      .welcome-banner-sub { font-size: 0.75rem; line-height: 1.5; }
       .welcome-stats-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.4rem;
         width: 100%;
-        justify-content: space-between;
       }
-      .w-stat { flex: 1; }
+      .w-stat {
+        flex: unset;
+        padding: 0.5rem 0.3rem;
+        min-width: unset;
+        border-radius: 10px;
+      }
+      .w-stat-val { font-size: 1.1rem; }
+      .w-stat-lbl { font-size: 0.55rem; letter-spacing: 0.5px; }
       .welcome-banner-title { font-size: 1rem; }
 
       .header-block {
@@ -2656,79 +2680,60 @@
         font-size: 1.55rem;
       }
 
-      /* Filter bar — stack all groups vertically */
+      /* Filter bar */
       .filter-bar {
         padding: 0.9rem;
-        gap: 0.8rem;
+        gap: 0.7rem;
         flex-direction: column;
         align-items: stretch;
-      }
-
-      .filter-group {
-        width: 100%;
-      }
-
-      .input-premium {
-        min-width: unset;
-        width: 100%;
-      }
-
-      .select-premium {
-        width: 100%;
-        min-width: unset;
-      }
-
-      .btn-toggle-group {
-        width: 100%;
-      }
-
-      .btn-toggle {
-        flex-grow: 1;
-        text-align: center;
-      }
-
-      /* Quiz container */
-      .quiz-active-container {
-        padding: 1.2rem 1rem;
         border-radius: 14px;
       }
+      .filter-group { width: 100%; }
+      .input-premium { min-width: unset; width: 100%; }
+      .select-premium { width: 100%; min-width: unset; height: 42px; font-size: 0.88rem; }
+      .filter-label { font-size: 0.65rem; margin-bottom: 0.3rem; }
+
+      /* Year + Topic in a 2-col row on mobile */
+      .filter-bar .filter-group:nth-child(1),
+      .filter-bar .filter-group:nth-child(2) { width: calc(50% - 0.35rem); display: inline-flex; flex-direction: column; vertical-align: top; }
+
+      .btn-toggle-group { width: 100%; }
+      .btn-toggle { flex-grow: 1; text-align: center; font-size: 0.82rem; }
+
+      /* Quiz container */
+      .quiz-active-container { padding: 1.1rem 0.9rem; border-radius: 14px; }
 
       .quiz-meta {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0.4rem;
-        padding-bottom: 1rem;
-      }
-
-      .question-title {
-        font-size: 1rem;
-        line-height: 1.6;
-        margin-bottom: 1.2rem;
-      }
-
-      .option-card {
-        padding: 0.85rem 1rem;
-        font-size: 0.87rem;
-      }
-
-      .navigation-controls {
+        flex-direction: row;
         flex-wrap: wrap;
-        gap: 0.6rem;
-        margin-top: 1.5rem;
+        align-items: center;
+        gap: 0.4rem;
+        padding-bottom: 0.9rem;
       }
+      .quiz-badge { font-size: 0.7rem; padding: 0.28rem 0.65rem; }
+      .quiz-score { font-size: 0.88rem; margin-left: auto; }
 
+      .question-title { font-size: 1rem; line-height: 1.6; margin-bottom: 1rem; }
+      .option-card { padding: 0.8rem 0.9rem; font-size: 0.87rem; gap: 0.8rem; }
+      .option-number { width: 26px; height: 26px; font-size: 0.8rem; flex-shrink: 0; }
+
+      .navigation-controls { flex-wrap: wrap; gap: 0.5rem; margin-top: 1.2rem; }
       .navigation-controls .btn-premium {
-        flex: 1;
-        min-width: 0;
-        padding: 0.7rem 0.8rem;
-        font-size: 0.82rem;
+        flex: 1; min-width: 0;
+        padding: 0.65rem 0.5rem;
+        font-size: 0.8rem;
         justify-content: center;
       }
 
+      /* Explanation box */
+      .explanation-box { padding: 1rem 1.1rem; margin-top: 1.2rem; }
+      .explanation-title { font-size: 0.9rem; }
+      .explanation-text { font-size: 0.85rem; }
+
       /* Study cards */
-      .study-card {
-        padding: 1.2rem 1rem;
-      }
+      .study-card { padding: 1.1rem 0.9rem; }
+      .study-card-title { font-size: 1rem; }
+      .study-option { font-size: 0.85rem; padding: 0.7rem 0.9rem; }
 
       /* Lessons layout - full single column */
       .lessons-layout {
@@ -2761,32 +2766,92 @@
         flex-shrink: 0;
       }
 
+      /* Lesson notes — chapter header */
       .lesson-chapter-header {
-        padding: 1.4rem 1.2rem 1.2rem;
+        padding: 1.1rem 1rem 1rem;
+      }
+      .lesson-chapter-badge {
+        font-size: 0.62rem;
+        padding: 0.22rem 0.65rem;
+        margin-bottom: 0.6rem;
       }
       .lesson-chapter-title {
-        font-size: 1.4rem;
+        font-size: 1.25rem;
+        line-height: 1.3;
+        margin-bottom: 0.4rem;
       }
-      .lesson-reading-area {
-        padding: 1.5rem 1.2rem 2rem;
+      .lesson-chapter-subtitle {
+        font-size: 0.72rem;
+        flex-wrap: wrap;
+        gap: 0.3rem;
       }
-      .lesson-nav-footer {
-        padding: 1rem 1.2rem;
+      .lesson-chapter-stats {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 0.4rem;
+        margin-top: 0.8rem;
+        overflow-x: auto;
+        scrollbar-width: none;
       }
+      .lesson-chapter-stats::-webkit-scrollbar { display: none; }
+      .lesson-stat-chip {
+        font-size: 0.68rem;
+        padding: 0.28rem 0.65rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      /* Lesson reading area */
+      .lesson-reading-area { padding: 1.2rem 1rem 1.5rem; }
+      .lesson-progress-bar { margin-bottom: 1.5rem; }
+
+      /* Lesson nav footer */
+      .lesson-nav-footer { padding: 0.9rem 1rem; gap: 0.5rem; }
       .lesson-nav-btn {
         flex: 1;
         justify-content: center;
-        font-size: 0.8rem;
-        padding: 0.55rem 0.8rem;
+        font-size: 0.78rem;
+        padding: 0.5rem 0.6rem;
+      }
+      #lesson-nav-label { font-size: 0.72rem; }
+
+      /* Lesson notes sidebar (unit tabs) */
+      .lesson-tab-wrap {
+        position: relative;
+        overflow: hidden;
+        border-radius: 12px;
+      }
+      .lesson-tab-wrap::after {
+        content: '';
+        position: absolute;
+        top: 0; right: 0; bottom: 0;
+        width: 48px;
+        background: linear-gradient(to right, transparent, rgba(7,8,12,0.95));
+        pointer-events: none;
+        z-index: 2;
+      }
+      #lesson-notes .lessons-sidebar {
+        border-radius: 0;
+      }
+      #lesson-notes .lessons-sidebar-label { display: none; }
+      #lesson-notes .lesson-selector-item {
+        font-size: 0.78rem;
+        padding: 0.5rem 0.85rem;
       }
 
       /* Markdown content mobile */
-      .markdown-content h1 { font-size: 1.5rem; }
-      .markdown-content h2 { font-size: 1.1rem; padding: 0.6rem 0.8rem; }
-      .markdown-content h3 { font-size: 1rem; }
+      .markdown-content h1 { font-size: 1.3rem; }
+      .markdown-content h2 { font-size: 1.05rem; padding: 0.55rem 0.8rem; margin-top: 2rem; }
+      .markdown-content h3 { font-size: 0.95rem; margin-top: 1.5rem; }
+      .markdown-content h1::before { font-size: 1.1rem; }
       .markdown-content p,
       .markdown-content ul li,
-      .ordered-list-item { font-size: 0.92rem; }
+      .ordered-list-item { font-size: 0.9rem; line-height: 1.7; }
+      .markdown-content pre { padding: 1rem; }
+      .markdown-content code { font-size: 0.8rem; }
+      .book-callout { padding: 0.9rem 1rem; font-size: 0.88rem; }
+      .key-term { padding: 0.7rem 0.9rem; font-size: 0.88rem; }
 
       /* Labs */
       .labs-grid {
@@ -2804,6 +2869,38 @@
         scrollbar-width: none;
       }
 
+      /* Fade-right hint wrapper — used by both lesson notes and interactive labs */
+      .lessons-sidebar-wrap {
+        position: relative;
+        overflow: hidden;
+        border-radius: 12px;
+      }
+      .lessons-sidebar-wrap::after {
+        content: '';
+        position: absolute;
+        top: 0; right: 0; bottom: 0;
+        width: 52px;
+        background: linear-gradient(to right, transparent, rgba(7,8,12,0.95));
+        pointer-events: none;
+        z-index: 2;
+        border-radius: 0 12px 12px 0;
+      }
+      /* Wrap tabs in a fade-right container to hint scrollability */
+      #interactive-labs .lessons-sidebar-wrap {
+        position: relative;
+        overflow: hidden;
+        border-radius: 12px;
+      }
+      #interactive-labs .lessons-sidebar-wrap::after {
+        content: '';
+        position: absolute;
+        top: 0; right: 0; bottom: 0;
+        width: 48px;
+        background: linear-gradient(to right, transparent, rgba(7,8,12,0.9));
+        pointer-events: none;
+        z-index: 2;
+        border-radius: 0 12px 12px 0;
+      }
       #interactive-labs .lessons-sidebar {
         position: static;
         flex-direction: row !important;
@@ -2891,18 +2988,68 @@
       }
     }
 
+    /* Interactive Labs – prevent overflow on all screen sizes */
+    @media (max-width: 1023px) {
+      .lab-content-area { min-width: 0; overflow-x: hidden; }
+      .lab-widget-card  { min-width: 0; max-width: 100%; overflow-x: hidden; }
+    }
+
+    @media (max-width: 767px) {
+      .lab-widget-card { padding: 1.1rem; border-radius: 14px; }
+      .lab-widget-card h3 { font-size: 1rem; margin-bottom: 0.4rem; }
+
+      /* Number system */
+      .numconv-grid { grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+      .numconv-value { font-size: 1rem; }
+      .numconv-output-card { padding: 0.9rem; }
+
+      /* Truth table */
+      .truth-input-row { flex-direction: column; gap: 0.7rem; }
+      .truth-input-row .btn-premium { width: 100%; justify-content: center; }
+      .truth-table th, .truth-table td { padding: 0.5rem 0.7rem; font-size: 0.82rem; }
+
+      /* CPU Scheduling */
+      .sched-process-form { padding: 0.9rem; }
+      .sched-form-row { gap: 0.6rem; }
+      .sched-form-row .filter-group { flex: 1 1 110px; }
+      .sched-form-row .btn-premium  { flex: 1; justify-content: center; font-size: 0.8rem; padding: 0.55rem 0.5rem; }
+      .sched-process-table-wrap { overflow-x: auto; }
+      .sched-process-table { min-width: 340px; font-size: 0.8rem; }
+      .sched-process-table th, .sched-process-table td { padding: 0.45rem 0.6rem; }
+      .sched-gantt-wrap { overflow-x: auto; padding: 0.9rem; }
+      .sched-gantt-bar, .sched-gantt-time { min-width: 300px; }
+      .sched-stats-grid { grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+      .sched-stat-card { padding: 0.8rem; }
+      .sched-stat-value { font-size: 1.2rem; }
+
+      /* Process States — 2×2 grid layout on mobile */
+      .process-states-visualizer {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 1.2rem 0.8rem;
+        gap: 0.6rem;
+      }
+      .state-node { width: 72px; height: 72px; font-size: 0.72rem; flex-shrink: 0; }
+      .state-connector { display: none; }
+      .simulator-controls { gap: 0.5rem; flex-wrap: wrap; }
+      .simulator-controls .btn-premium { font-size: 0.76rem; padding: 0.5rem 0.65rem; flex: 1 1 110px; }
+      .process-table-card { overflow-x: auto; }
+
+      /* HTML/CSS Editor */
+      .editor-layout { grid-template-columns: 1fr; gap: 0.8rem; }
+      .code-editor { min-height: 130px; font-size: 0.78rem; }
+      .html-preview-frame { height: 220px; }
+      .editor-toolbar .btn-premium { font-size: 0.78rem; padding: 0.5rem 0.7rem; }
+    }
+
     @media (max-width: 480px) {
       main { padding: 0.8rem 0.8rem; }
-
       .quiz-active-container { padding: 1rem 0.8rem; border-radius: 12px; }
       .option-card { font-size: 0.84rem; padding: 0.75rem 0.8rem; }
-
       .analytics-summary-cards { grid-template-columns: 1fr; }
-
       .lesson-chapter-title { font-size: 1.25rem; }
       .lesson-chapter-stats { gap: 0.6rem; }
       .numconv-grid { grid-template-columns: 1fr; }
-      .editor-layout { grid-template-columns: 1fr; }
       .sched-stats-grid { grid-template-columns: 1fr 1fr; }
       .results-modal { padding: 1.5rem 1.2rem; }
     }
@@ -3191,10 +3338,12 @@
         </div>
 
         <div class="lessons-layout">
-          <!-- Unit Selector Sidebar -->
-          <div class="lessons-sidebar" id="lesson-selector-sidebar">
-            <div class="lessons-sidebar-label">📚 Units</div>
-            <!-- Sidebar selectors will populate here -->
+          <!-- Unit Selector Sidebar (wrapped for mobile fade hint) -->
+          <div class="lessons-sidebar-wrap lesson-tab-wrap">
+            <div class="lessons-sidebar" id="lesson-selector-sidebar">
+              <div class="lessons-sidebar-label">📚 Units</div>
+              <!-- Sidebar selectors will populate here -->
+            </div>
           </div>
 
           <!-- Main Book Body -->
@@ -3247,14 +3396,16 @@
         </div>
         
         <div class="labs-grid">
-          <div class="lessons-sidebar">
-            <div class="lesson-selector-item active" id="lab-tab-gate"    onclick="switchLabTab('gate')">⚡ Logic Gate</div>
-            <div class="lesson-selector-item" id="lab-tab-numconv"        onclick="switchLabTab('numconv')">🔢 Number Systems</div>
-            <div class="lesson-selector-item" id="lab-tab-truth"          onclick="switchLabTab('truth')">📋 Truth Table</div>
-            <div class="lesson-selector-item" id="lab-tab-sched"          onclick="switchLabTab('sched')">🖥️ CPU Scheduling</div>
-            <div class="lesson-selector-item" id="lab-tab-process"        onclick="switchLabTab('process')">⚙️ Process States</div>
-            <div class="lesson-selector-item" id="lab-tab-subnet"         onclick="switchLabTab('subnet')">🌐 IP Subnetting</div>
-            <div class="lesson-selector-item" id="lab-tab-htmlcss"        onclick="switchLabTab('htmlcss')">🌍 HTML/CSS Editor</div>
+          <div class="lessons-sidebar-wrap">
+            <div class="lessons-sidebar">
+              <div class="lesson-selector-item active" id="lab-tab-gate"    onclick="switchLabTab('gate')">⚡ Logic Gate</div>
+              <div class="lesson-selector-item" id="lab-tab-numconv"        onclick="switchLabTab('numconv')">🔢 Number Systems</div>
+              <div class="lesson-selector-item" id="lab-tab-truth"          onclick="switchLabTab('truth')">📋 Truth Table</div>
+              <div class="lesson-selector-item" id="lab-tab-sched"          onclick="switchLabTab('sched')">🖥️ CPU Scheduling</div>
+              <div class="lesson-selector-item" id="lab-tab-process"        onclick="switchLabTab('process')">⚙️ Process States</div>
+              <div class="lesson-selector-item" id="lab-tab-subnet"         onclick="switchLabTab('subnet')">🌐 IP Subnetting</div>
+              <div class="lesson-selector-item" id="lab-tab-htmlcss"        onclick="switchLabTab('htmlcss')">🌍 HTML/CSS Editor</div>
+            </div>
           </div>
           
           <div class="lab-content-area">
@@ -3355,9 +3506,9 @@
                 
                 <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
                   <!-- Wait and Interrupt pathways -->
-                  <div style="background:rgba(15,19,25,0.4); border:1px solid var(--border-glass); padding:1rem; border-radius:12px; font-size:0.8rem; display:flex; gap:1.5rem; width: 100%;">
-                    <div>🔄 **Interrupt**: Running ➔ Ready (e.g. timeout / preemption)</div>
-                    <div>⏳ **I/O Wait**: Running ➔ Waiting ➔ Ready</div>
+                  <div style="background:rgba(15,19,25,0.4);border:1px solid var(--border-glass);padding:0.9rem 1rem;border-radius:12px;font-size:0.8rem;display:flex;gap:1rem;flex-wrap:wrap;width:100%;">
+                    <div>🔄 <strong>Interrupt</strong>: Running ➔ Ready (timeout / preemption)</div>
+                    <div>⏳ <strong>I/O Wait</strong>: Running ➔ Waiting ➔ Ready</div>
                   </div>
                 </div>
                 
@@ -3810,6 +3961,19 @@ li { margin: 4px 0; }</textarea>
       // Trigger side behaviors
       if (tabId === 'analytics') {
         renderPerformanceStats();
+      }
+      // On mobile, briefly scroll tabs right then back to hint scrollability
+      if (tabId === 'interactive-labs' || tabId === 'lesson-notes') {
+        const sidebarSel = tabId === 'interactive-labs'
+          ? '#interactive-labs .lessons-sidebar'
+          : '#lesson-notes .lessons-sidebar';
+        const sb = document.querySelector(sidebarSel);
+        if (sb && window.innerWidth <= 1023) {
+          setTimeout(() => {
+            sb.scrollTo({ left: 140, behavior: 'smooth' });
+            setTimeout(() => sb.scrollTo({ left: 0, behavior: 'smooth' }), 750);
+          }, 400);
+        }
       }
     }
 

@@ -1,0 +1,4001 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>G.C.E. A/L ICT Interactive Learning Portal - J.Abiraj</title>
+  
+  <!-- Modern Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- CSS Styling -->
+  <style>
+    :root {
+      --bg-dark: #070709;
+      --bg-card: rgba(18, 18, 24, 0.75);
+      --bg-glass: rgba(30, 27, 22, 0.45);
+      --border-glass: rgba(197, 160, 89, 0.15);
+      
+      --accent-primary: #c5a059;
+      --accent-glow: rgba(197, 160, 89, 0.25);
+      --accent-primary-hover: #dfb974;
+      
+      --accent-secondary: #f3e5ab;
+      --accent-secondary-glow: rgba(243, 229, 171, 0.15);
+      
+      --color-success: #10b981;
+      --color-success-glow: rgba(16, 185, 129, 0.2);
+      
+      --color-error: #ef4444;
+      --color-error-glow: rgba(239, 68, 68, 0.2);
+      
+      --text-main: #e2e8f0;
+      --text-muted: #94a3b8;
+      --text-bright: #ffffff;
+      
+      --shadow-premium: 0 15px 45px 0 rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent-primary) var(--bg-dark);
+    }
+    
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(at 10% 20%, rgba(197, 160, 89, 0.08) 0px, transparent 50%),
+        radial-gradient(at 90% 80%, rgba(243, 229, 171, 0.04) 0px, transparent 50%);
+      background-attachment: fixed;
+    }
+    
+    /* Layout */
+    .app-container {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+    }
+    
+    /* Mobile Header */
+    .mobile-header {
+      display: none;
+      background: rgba(8, 11, 16, 0.95);
+      border-bottom: 1px solid var(--border-glass);
+      padding: 1rem 1.5rem;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+    }
+    
+    .menu-toggle {
+      background: transparent;
+      border: none;
+      color: var(--text-main);
+      font-size: 1.6rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .mobile-logo {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #c5a059, #f3e5ab, #aa7c11);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    /* Sidebar Overlay (Mobile) */
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(4px);
+      z-index: 150;
+    }
+    
+    .sidebar-overlay.active {
+      display: block;
+    }
+    
+    /* Sidebar Navigation */
+    aside {
+      background: rgba(7, 8, 12, 0.97);
+      border-right: 1px solid rgba(197, 160, 89, 0.12);
+      backdrop-filter: blur(24px);
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      overflow-x: hidden;
+      z-index: 200;
+      transition: var(--transition-smooth);
+      scrollbar-width: none;
+    }
+    aside::-webkit-scrollbar { display: none; }
+
+    /* ── Sidebar top branding strip ── */
+    .sidebar-brand {
+      padding: 1.6rem 1.4rem 1.2rem;
+      border-bottom: 1px solid rgba(197, 160, 89, 0.08);
+      background: linear-gradient(180deg, rgba(197,160,89,0.04) 0%, transparent 100%);
+    }
+
+    .logo-lockup {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #c5a059, #dfb974);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(197,160,89,0.35);
+    }
+
+    .logo-text-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.05rem;
+    }
+
+    .logo-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #f3e5ab 0%, #c5a059 50%, #dfb974 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: -0.3px;
+      line-height: 1.1;
+    }
+
+    .logo-subtitle {
+      font-size: 0.62rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .logo-pill-row {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .logo-pill {
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 0.2rem 0.55rem;
+      border-radius: 99px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    .logo-pill-gold {
+      color: var(--accent-primary);
+      background: rgba(197,160,89,0.1);
+      border: 1px solid rgba(197,160,89,0.2);
+    }
+    .logo-pill-green {
+      color: var(--color-success);
+      background: rgba(16,185,129,0.08);
+      border: 1px solid rgba(16,185,129,0.2);
+    }
+
+    /* ── Creator identity card ── */
+    .creator-card {
+      margin: 1rem 1.1rem;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(197,160,89,0.18);
+      background: linear-gradient(145deg, rgba(197,160,89,0.07) 0%, rgba(18,18,26,0.9) 60%);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.04);
+      position: relative;
+    }
+
+    /* Subtle shimmer top edge */
+    .creator-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(197,160,89,0.5), transparent);
+    }
+
+    .creator-card-inner {
+      padding: 1.2rem 1.1rem 1rem;
+    }
+
+    .creator-avatar-wrap {
+      position: relative;
+      width: 56px;
+      height: 56px;
+      margin-bottom: 0.9rem;
+    }
+
+    .creator-avatar-ring {
+      position: absolute;
+      inset: -3px;
+      border-radius: 50%;
+      background: conic-gradient(#c5a059, #f3e5ab, #dfb974, #aa7c11, #c5a059);
+      animation: ring-spin 6s linear infinite;
+    }
+    @keyframes ring-spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .creator-avatar {
+      position: relative;
+      z-index: 1;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1a1610 0%, #0d0e14 100%);
+      border: 2px solid rgba(7,8,12,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: var(--accent-primary);
+      letter-spacing: -1px;
+    }
+
+    .creator-name {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      background: linear-gradient(135deg, #f3e5ab, #c5a059);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+      margin-bottom: 0.15rem;
+    }
+
+    .creator-role {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      font-weight: 500;
+      margin-bottom: 0.7rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .creator-role::before {
+      content: '';
+      width: 14px;
+      height: 1px;
+      background: var(--accent-primary);
+      opacity: 0.5;
+      flex-shrink: 0;
+    }
+
+    .creator-badge-row {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .creator-badge {
+      font-size: 0.62rem;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      letter-spacing: 0.3px;
+    }
+    .creator-badge-degree {
+      background: rgba(197,160,89,0.1);
+      border: 1px solid rgba(197,160,89,0.25);
+      color: var(--accent-primary-hover);
+    }
+    .creator-badge-verified {
+      background: rgba(16,185,129,0.1);
+      border: 1px solid rgba(16,185,129,0.25);
+      color: var(--color-success);
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    /* ── Stat chips row inside creator card ── */
+    .creator-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.5rem;
+      padding: 0.8rem 1.1rem;
+      border-top: 1px solid rgba(255,255,255,0.04);
+      background: rgba(0,0,0,0.2);
+    }
+
+    .c-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.1rem;
+    }
+    .c-stat-val {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--accent-secondary);
+    }
+    .c-stat-lbl {
+      font-size: 0.55rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      text-align: center;
+    }
+
+    /* ── Nav menu ── */
+    .nav-section {
+      padding: 0.6rem 1.1rem 0.4rem;
+      flex-grow: 1;
+    }
+
+    .nav-section-label {
+      font-size: 0.58rem;
+      font-weight: 700;
+      color: rgba(148, 163, 184, 0.4);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 0 0.3rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .nav-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      list-style: none;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-weight: 500;
+      transition: var(--transition-smooth);
+      border: 1px solid transparent;
+      font-size: 0.9rem;
+      position: relative;
+    }
+
+    .nav-item:hover {
+      color: var(--text-main);
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .nav-item.active {
+      color: var(--text-bright);
+      background: linear-gradient(135deg, rgba(197,160,89,0.1) 0%, rgba(30,27,22,0.4) 100%);
+      border-color: rgba(197,160,89,0.2);
+      box-shadow: inset 0 0 20px rgba(197,160,89,0.06);
+    }
+
+    .nav-item.active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      width: 3px;
+      height: 55%;
+      background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 0 4px 4px 0;
+      box-shadow: 0 0 8px var(--accent-glow);
+    }
+
+    .nav-icon {
+      font-size: 1.1rem;
+      width: 20px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .nav-item-text {
+      flex-grow: 1;
+    }
+
+    .nav-item-badge {
+      font-size: 0.6rem;
+      font-weight: 700;
+      background: rgba(197,160,89,0.15);
+      color: var(--accent-primary);
+      padding: 0.15rem 0.45rem;
+      border-radius: 99px;
+      border: 1px solid rgba(197,160,89,0.2);
+    }
+
+    /* ── Sidebar footer ── */
+    .nav-footer {
+      padding: 1rem 1.4rem 1.4rem;
+      border-top: 1px solid rgba(197, 160, 89, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .nav-footer-line {
+      font-size: 0.68rem;
+      color: rgba(148,163,184,0.45);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .nav-footer-line-accent {
+      color: rgba(197,160,89,0.5);
+    }
+    .nav-footer-dot {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: rgba(197,160,89,0.3);
+      flex-shrink: 0;
+    }
+    
+    /* Main Content Area */
+    main {
+      padding: 2.5rem 3.5rem;
+      overflow-y: auto;
+      max-height: 100vh;
+    }
+    
+    /* Page Views */
+    .page-view {
+      display: none;
+      animation: fadeIn 0.4s ease-out;
+    }
+    
+    .page-view.active {
+      display: block;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Title Block */
+    .header-block {
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+    
+    .header-block::after {
+      content: '';
+      position: absolute;
+      bottom: -1rem;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 99px;
+    }
+    
+    .header-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.3rem;
+      font-weight: 800;
+      color: var(--text-bright);
+      margin-bottom: 0.4rem;
+    }
+    
+    .header-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+    
+    /* Filter Bar Component */
+    .filter-bar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      backdrop-filter: blur(20px);
+      padding: 1.25rem;
+      border-radius: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      align-items: center;
+      margin-bottom: 2.5rem;
+      box-shadow: var(--shadow-premium);
+    }
+    
+    .filter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+    
+    .filter-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    
+    .select-premium, .input-premium {
+      background: rgba(15, 19, 25, 0.75);
+      border: 1px solid var(--border-glass);
+      color: var(--text-main);
+      padding: 0.65rem 1.1rem;
+      border-radius: 10px;
+      outline: none;
+      font-size: 0.88rem;
+      transition: var(--transition-smooth);
+      min-width: 160px;
+    }
+    
+    .input-premium {
+      min-width: 280px;
+    }
+    
+    .select-premium:focus, .input-premium:focus {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+    
+    .btn-toggle-group {
+      display: flex;
+      background: rgba(15, 19, 25, 0.75);
+      padding: 0.25rem;
+      border-radius: 10px;
+      border: 1px solid var(--border-glass);
+    }
+    
+    .btn-toggle {
+      border: none;
+      background: transparent;
+      color: var(--text-muted);
+      padding: 0.45rem 1.2rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+    
+    .btn-toggle.active {
+      background: var(--accent-primary);
+      color: var(--text-bright);
+      box-shadow: 0 2px 10px var(--accent-glow);
+    }
+    
+    /* MCQ Grid / Cards */
+    .mcq-layout {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.8rem;
+    }
+    
+    /* Quiz Active Container */
+    .quiz-active-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: var(--shadow-premium);
+      backdrop-filter: blur(20px);
+    }
+    
+    .quiz-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border-glass);
+      padding-bottom: 1.2rem;
+    }
+    
+    .quiz-badge {
+      background: var(--accent-glow);
+      color: var(--accent-primary-hover);
+      padding: 0.35rem 0.8rem;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      border: 1px solid rgba(197, 160, 89, 0.25);
+    }
+    
+    .quiz-score {
+      font-size: 0.95rem;
+      color: var(--accent-secondary);
+      font-weight: 700;
+    }
+    
+    .question-box {
+      margin-bottom: 2.5rem;
+    }
+    
+    .question-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      line-height: 1.6;
+      color: var(--text-bright);
+      margin-bottom: 1.8rem;
+      white-space: pre-wrap;
+    }
+    
+    .options-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    
+    .option-card {
+      background: rgba(15, 19, 25, 0.5);
+      border: 1px solid var(--border-glass);
+      padding: 1.1rem 1.6rem;
+      border-radius: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 1.1rem;
+      transition: var(--transition-smooth);
+      color: var(--text-main);
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+    
+    .option-card:hover {
+      background: rgba(255, 255, 255, 0.02);
+      border-color: rgba(197, 160, 89, 0.4);
+      transform: translateX(5px);
+    }
+    
+    .option-card.selected {
+      border-color: var(--accent-primary);
+      background: rgba(197, 160, 89, 0.08);
+    }
+    
+    .option-card.correct {
+      border-color: var(--color-success);
+      background: rgba(16, 185, 129, 0.08);
+      color: var(--color-success);
+    }
+    
+    .option-card.incorrect {
+      border-color: var(--color-error);
+      background: rgba(239, 68, 68, 0.08);
+      color: var(--color-error);
+    }
+    
+    .option-number {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-glass);
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      flex-shrink: 0;
+    }
+    
+    .option-card.correct .option-number {
+      background: var(--color-success);
+      color: #fff;
+      border-color: var(--color-success);
+    }
+    
+    .option-card.incorrect .option-number {
+      background: var(--color-error);
+      color: #fff;
+      border-color: var(--color-error);
+    }
+    
+    .navigation-controls {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2.5rem;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .btn-premium {
+      border: none;
+      outline: none;
+      background: var(--accent-primary);
+      color: var(--text-bright);
+      padding: 0.8rem 1.8rem;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 14px var(--accent-glow);
+      transition: var(--transition-smooth);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .btn-premium:hover {
+      background: var(--accent-primary-hover);
+      box-shadow: 0 6px 20px var(--accent-glow);
+      transform: translateY(-1.5px);
+    }
+    
+    .btn-premium:disabled {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      box-shadow: none;
+      cursor: not-allowed;
+      transform: none;
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border-glass);
+      color: var(--text-main);
+      box-shadow: none;
+    }
+    
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: var(--text-muted);
+      transform: translateY(-1px);
+      box-shadow: none;
+    }
+    
+    /* Explanation Box */
+    .explanation-box {
+      margin-top: 2rem;
+      background: rgba(15, 19, 25, 0.8);
+      border: 1px solid var(--border-glass);
+      border-radius: 14px;
+      padding: 1.6rem;
+      animation: slideDown 0.3s ease-out;
+      border-left: 4px solid var(--accent-secondary);
+    }
+    
+    @keyframes slideDown {
+      from { opacity: 0; max-height: 0; overflow: hidden; }
+      to { opacity: 1; max-height: 1000px; }
+    }
+    
+    .explanation-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--accent-secondary);
+      margin-bottom: 0.8rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .explanation-text {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text-main);
+      white-space: pre-wrap;
+    }
+    
+    /* Study Mode Card Grid */
+    .study-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 2.2rem;
+    }
+    
+    .study-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: var(--shadow-premium);
+      backdrop-filter: blur(12px);
+      transition: var(--transition-smooth);
+    }
+    
+    .study-card:hover {
+      border-color: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+    }
+    
+    .study-card-meta {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1.3rem;
+      gap: 0.8rem;
+    }
+    
+    .study-card-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      line-height: 1.55;
+      color: var(--text-bright);
+      margin-bottom: 1.3rem;
+      white-space: pre-wrap;
+    }
+    
+    .study-options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.65rem;
+      margin-bottom: 1.6rem;
+    }
+    
+    .study-option {
+      background: rgba(15, 19, 25, 0.4);
+      border: 1px solid var(--border-glass);
+      padding: 0.85rem 1.25rem;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      color: var(--text-main);
+    }
+    
+    .study-option.correct {
+      border-color: var(--color-success);
+      background: rgba(16, 185, 129, 0.08);
+      color: var(--color-success);
+      font-weight: 600;
+    }
+    
+    /* Study mode Accordion */
+    .study-accordion-trigger {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-glass);
+      padding: 0.8rem 1.3rem;
+      border-radius: 10px;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      transition: var(--transition-smooth);
+    }
+    
+    .study-accordion-trigger:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-main);
+    }
+    
+    .study-accordion-content {
+      display: none;
+      margin-top: 1rem;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 10px;
+      padding: 1.3rem;
+      border-left: 4px solid var(--accent-primary);
+      animation: fadeIn 0.3s ease-out;
+    }
+    
+    .study-accordion-content.open {
+      display: block;
+    }
+    
+    /* Lesson Notes Layout */
+    .lessons-layout {
+      display: grid;
+      grid-template-columns: 230px 1fr 210px;
+      gap: 1.8rem;
+    }
+
+    .lessons-sidebar {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: 16px;
+      padding: 1rem;
+      height: max-content;
+      position: sticky;
+      top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .lessons-sidebar-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 0.4rem 0.6rem 0.6rem;
+      border-bottom: 1px solid var(--border-glass);
+      margin-bottom: 0.2rem;
+    }
+
+    .lesson-selector-item {
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: var(--transition-smooth);
+      border: 1px solid transparent;
+      line-height: 1.4;
+    }
+
+    .lesson-selector-item:hover {
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text-main);
+    }
+
+    .lesson-selector-item.active {
+      background: var(--accent-glow);
+      color: var(--accent-primary-hover);
+      border-color: rgba(197, 160, 89, 0.25);
+    }
+
+    /* Lesson body reading progress bar */
+    .lesson-progress-bar {
+      height: 3px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 99px;
+      margin-bottom: 2.5rem;
+      overflow: hidden;
+    }
+    .lesson-progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 99px;
+      transition: width 0.15s ease-out;
+    }
+
+    .lesson-body-card {
+      background: rgba(14, 17, 23, 0.85);
+      border: 1px solid var(--border-glass);
+      border-radius: 20px;
+      padding: 0;
+      box-shadow: var(--shadow-premium);
+      backdrop-filter: blur(12px);
+      overflow: hidden;
+    }
+
+    /* Chapter header inside lesson body */
+    .lesson-chapter-header {
+      padding: 2.5rem 3rem 2rem;
+      border-bottom: 1px solid var(--border-glass);
+      background: linear-gradient(135deg, rgba(197,160,89,0.06) 0%, rgba(14,17,23,0) 60%);
+      position: relative;
+    }
+    .lesson-chapter-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px; height: 100%;
+      background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 0 2px 2px 0;
+    }
+    .lesson-chapter-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--accent-glow);
+      border: 1px solid rgba(197,160,89,0.3);
+      color: var(--accent-primary);
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 0.3rem 0.8rem;
+      border-radius: 99px;
+      margin-bottom: 0.9rem;
+    }
+    .lesson-chapter-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.9rem;
+      font-weight: 800;
+      color: var(--text-bright);
+      line-height: 1.25;
+      margin-bottom: 0.5rem;
+    }
+    .lesson-chapter-subtitle {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .lesson-chapter-subtitle span {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .lesson-chapter-stats {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .lesson-stat-chip {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border-glass);
+      padding: 0.35rem 0.8rem;
+      border-radius: 8px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+    .lesson-stat-chip strong {
+      color: var(--accent-secondary);
+      font-weight: 700;
+    }
+
+    .lesson-reading-area {
+      padding: 2.5rem 3rem 3rem;
+    }
+
+    /* Unit navigation footer */
+    .lesson-nav-footer {
+      padding: 1.5rem 3rem;
+      border-top: 1px solid var(--border-glass);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0,0,0,0.2);
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .lesson-nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: transparent;
+      border: 1px solid var(--border-glass);
+      color: var(--text-muted);
+      padding: 0.65rem 1.2rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 600;
+      transition: var(--transition-smooth);
+    }
+    .lesson-nav-btn:hover:not(:disabled) {
+      color: var(--text-bright);
+      border-color: var(--accent-primary);
+      background: var(--accent-glow);
+    }
+    .lesson-nav-btn:disabled {
+      opacity: 0.3;
+      cursor: default;
+    }
+
+    /* Dynamic Table of Contents (TOC) Sidebar */
+    .lesson-toc-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: 16px;
+      padding: 1.25rem;
+      height: max-content;
+      position: sticky;
+      top: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      box-shadow: var(--shadow-premium);
+    }
+
+    .toc-title {
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 1px solid var(--border-glass);
+      padding-bottom: 0.5rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .toc-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      max-height: 68vh;
+      overflow-y: auto;
+    }
+
+    .toc-item {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition-smooth);
+      border-left: 2px solid transparent;
+      padding: 0.3rem 0.5rem;
+      border-radius: 0 6px 6px 0;
+      line-height: 1.4;
+    }
+
+    .toc-item:hover {
+      color: var(--text-bright);
+      border-color: var(--accent-primary-hover);
+      background: rgba(255,255,255,0.02);
+    }
+
+    .toc-item.active-toc {
+      color: var(--accent-primary-hover);
+      border-color: var(--accent-primary);
+      background: var(--accent-glow);
+    }
+
+    .toc-item.h3-item {
+      padding-left: 1.2rem;
+      font-size: 0.76rem;
+    }
+
+    /* Mobile TOC toggle floating button */
+    .lesson-toc-mobile-btn {
+      display: none;
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 300;
+      background: var(--accent-primary);
+      color: var(--text-bright);
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      box-shadow: 0 4px 20px var(--accent-glow);
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-smooth);
+    }
+    .lesson-toc-mobile-btn:hover {
+      background: var(--accent-primary-hover);
+      transform: scale(1.1);
+    }
+
+    /* Mobile TOC drawer */
+    .lesson-toc-drawer {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 400;
+      background: rgba(10, 14, 21, 0.97);
+      border-top: 1px solid var(--border-glass);
+      border-radius: 20px 20px 0 0;
+      padding: 1.5rem;
+      max-height: 60vh;
+      overflow-y: auto;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 -8px 40px rgba(0,0,0,0.6);
+      animation: slideUp 0.3s ease-out;
+    }
+    .lesson-toc-drawer.open {
+      display: block;
+    }
+    @keyframes slideUp {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .lesson-toc-drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid var(--border-glass);
+    }
+    .lesson-toc-drawer-close {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.4rem;
+      cursor: pointer;
+      padding: 0;
+      line-height: 1;
+    }
+
+    /* Textbook Layout Formatting */
+    .markdown-content {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    .markdown-content h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.9rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      color: var(--text-bright);
+      padding-bottom: 0.9rem;
+      border-bottom: 2px solid rgba(197,160,89,0.2);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .markdown-content h1::before {
+      content: '§';
+      color: var(--accent-primary);
+      font-size: 1.5rem;
+      opacity: 0.6;
+    }
+
+    .markdown-content h2 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-top: 2.8rem;
+      margin-bottom: 1rem;
+      color: var(--text-bright);
+      padding: 0.7rem 1rem;
+      background: rgba(197, 160, 89, 0.06);
+      border-left: 4px solid var(--accent-primary);
+      border-radius: 0 8px 8px 0;
+      scroll-margin-top: 2rem;
+    }
+
+    .markdown-content h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-top: 2rem;
+      margin-bottom: 0.8rem;
+      color: var(--accent-secondary);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      scroll-margin-top: 2rem;
+    }
+    .markdown-content h3::before {
+      content: '';
+      width: 20px;
+      height: 2px;
+      background: var(--accent-secondary);
+      flex-shrink: 0;
+      opacity: 0.5;
+    }
+
+    .markdown-content h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-top: 1.5rem;
+      margin-bottom: 0.6rem;
+      color: var(--text-main);
+    }
+
+    .markdown-content p {
+      font-size: 0.97rem;
+      line-height: 1.85;
+      margin-bottom: 1.2rem;
+      color: rgba(226, 232, 240, 0.9);
+    }
+
+    .markdown-content ul {
+      margin: 0 0 1.5rem 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      list-style: none;
+      padding: 0;
+    }
+
+    .markdown-content ul li {
+      position: relative;
+      padding-left: 1.6rem;
+      font-size: 0.97rem;
+      line-height: 1.7;
+      color: rgba(226, 232, 240, 0.9);
+    }
+
+    .markdown-content ul li::before {
+      content: '';
+      position: absolute;
+      left: 0.2rem;
+      top: 0.6em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent-primary);
+      opacity: 0.7;
+    }
+
+    /* Premium Ordered Lists */
+    .premium-ordered-list {
+      list-style: none;
+      margin: 0 0 1.5rem 0.5rem;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .ordered-list-item {
+      position: relative;
+      padding-left: 2.2rem;
+      font-size: 0.97rem;
+      line-height: 1.7;
+      color: rgba(226, 232, 240, 0.9);
+    }
+
+    .ordered-list-item::before {
+      content: attr(data-marker);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 1.7rem;
+      text-align: right;
+      color: var(--accent-primary);
+      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+    }
+
+    .markdown-content pre {
+      background: rgba(8, 11, 16, 0.9);
+      border: 1px solid var(--border-glass);
+      border-top: 3px solid var(--accent-primary);
+      padding: 1.5rem;
+      border-radius: 0 12px 12px 12px;
+      overflow-x: auto;
+      margin-bottom: 1.6rem;
+      position: relative;
+    }
+    .markdown-content pre::before {
+      content: 'CODE';
+      position: absolute;
+      top: -1.5rem; left: 0;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--accent-primary);
+      letter-spacing: 1px;
+      background: rgba(197,160,89,0.15);
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px 6px 0 0;
+      border: 1px solid rgba(197,160,89,0.2);
+      border-bottom: none;
+    }
+
+    .markdown-content code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.87rem;
+      color: var(--accent-secondary);
+      background: rgba(197,160,89,0.08);
+      padding: 0.1em 0.4em;
+      border-radius: 4px;
+      border: 1px solid rgba(197,160,89,0.1);
+    }
+
+    .markdown-content pre code {
+      color: #c9d1d9;
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 0.88rem;
+    }
+
+    .markdown-content .table-wrapper {
+      overflow-x: auto;
+      margin-bottom: 1.8rem;
+      border-radius: 10px;
+      border: 1px solid var(--border-glass);
+    }
+
+    .markdown-content table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 400px;
+    }
+
+    .markdown-content th, .markdown-content td {
+      border: none;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding: 0.85rem 1.2rem;
+      text-align: left;
+      font-size: 0.92rem;
+    }
+
+    .markdown-content th {
+      background: rgba(197, 160, 89, 0.08);
+      font-weight: 700;
+      color: var(--accent-primary-hover);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .markdown-content td {
+      color: rgba(226, 232, 240, 0.9);
+    }
+
+    .markdown-content tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Callout Card Boxes */
+    .book-callout {
+      padding: 1.1rem 1.4rem;
+      border-radius: 10px;
+      margin-bottom: 1.5rem;
+      font-size: 0.93rem;
+      line-height: 1.75;
+    }
+
+    .note-callout {
+      background: rgba(197, 160, 89, 0.06);
+      border-left: 4px solid var(--accent-primary);
+      color: var(--text-main);
+    }
+
+    .success-callout {
+      background: rgba(16, 185, 129, 0.06);
+      border-left: 4px solid var(--color-success);
+      color: var(--text-main);
+    }
+
+    .warning-callout {
+      background: rgba(239, 68, 68, 0.06);
+      border-left: 4px solid var(--color-error);
+      color: var(--text-main);
+    }
+
+    /* Key term definition highlight */
+    .key-term {
+      background: rgba(197,160,89,0.1);
+      border: 1px solid rgba(197,160,89,0.2);
+      padding: 0.85rem 1.2rem;
+      border-radius: 8px;
+      margin-bottom: 0.8rem;
+      font-size: 0.93rem;
+    }
+    .key-term strong {
+      color: var(--accent-primary-hover);
+    }
+    
+    /* Interactive Labs Layout */
+    .labs-grid {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 2rem;
+    }
+    
+    /* Widget Styles */
+    .lab-widget-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: var(--shadow-premium);
+      backdrop-filter: blur(12px);
+    }
+    
+    /* Visual Process State Simulator (Lab 1) */
+    .process-simulator-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    
+    .process-states-visualizer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      background: rgba(15, 19, 25, 0.55);
+      border: 1px solid var(--border-glass);
+      padding: 3rem 2rem;
+      border-radius: 16px;
+      margin-bottom: 1rem;
+      overflow-x: auto;
+      gap: 1rem;
+    }
+    
+    .state-node {
+      width: 95px;
+      height: 95px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      border: 2px solid var(--border-glass);
+      background: rgba(15, 19, 25, 0.85);
+      position: relative;
+      transition: var(--transition-smooth);
+      z-index: 2;
+      flex-shrink: 0;
+    }
+    
+    .state-node-title {
+      font-family: 'Outfit', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: 0.82rem;
+    }
+    
+    .state-node-processes {
+      font-size: 0.75rem;
+      color: var(--accent-secondary);
+      margin-top: 0.25rem;
+      font-weight: 500;
+    }
+    
+    .state-node.active {
+      border-color: var(--accent-primary);
+      background: var(--accent-glow);
+      color: var(--text-bright);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+    
+    .state-connector {
+      flex-grow: 1;
+      height: 2px;
+      background: var(--border-glass);
+      position: relative;
+      margin: 0 -10px;
+      z-index: 1;
+      min-width: 50px;
+    }
+    
+    .state-connector.active {
+      background: var(--accent-primary);
+      box-shadow: 0 0 8px var(--accent-primary);
+    }
+    
+    .state-connector-label {
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    
+    .state-connector.active .state-connector-label {
+      color: var(--accent-primary-hover);
+    }
+    
+    .simulator-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .process-table-card {
+      border: 1px solid var(--border-glass);
+      border-radius: 12px;
+      padding: 1.5rem;
+      background: rgba(15, 19, 25, 0.45);
+      overflow-x: auto;
+    }
+    
+    .process-table-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text-bright);
+    }
+    
+    .gantt-chart-container {
+      margin-top: 1.5rem;
+      padding: 1.25rem;
+      border: 1px solid var(--border-glass);
+      border-radius: 12px;
+      background: rgba(15, 19, 25, 0.5);
+    }
+    
+    .gantt-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 0.8rem;
+      color: var(--accent-secondary);
+    }
+    
+    .gantt-bar-flex {
+      display: flex;
+      height: 35px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border-glass);
+      background: rgba(0, 0, 0, 0.3);
+    }
+    
+    .gantt-slice {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #fff;
+      height: 100%;
+      transition: var(--transition-smooth);
+    }
+    
+    /* Subnet Calculator (Lab 2) */
+    .subnet-calculator-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    
+    .subnet-inputs-row {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    
+    .subnet-output-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .subnet-card {
+      background: rgba(15, 19, 25, 0.45);
+      border: 1px solid var(--border-glass);
+      padding: 1.25rem;
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .subnet-card-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .subnet-card-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--accent-secondary);
+    }
+    
+    .subnet-binary-box {
+      border: 1px solid var(--border-glass);
+      border-radius: 12px;
+      padding: 1.5rem;
+      background: rgba(15, 19, 25, 0.5);
+      overflow-x: auto;
+    }
+    
+    .subnet-binary-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      padding: 0.8rem 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.95rem;
+      gap: 1.5rem;
+    }
+    
+    .subnet-binary-row:last-child {
+      border-bottom: none;
+    }
+    
+    .binary-split-net {
+      color: var(--accent-primary-hover);
+      font-weight: 700;
+    }
+    
+    .binary-split-host {
+      color: var(--accent-secondary);
+      font-weight: 700;
+    }
+    
+    /* Logic Gate Playground (Lab 3) */
+    .logic-playground-container {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    
+    .logic-interactive-board {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      background: rgba(15, 19, 25, 0.45);
+      border: 1px solid var(--border-glass);
+      padding: 2.5rem;
+      border-radius: 16px;
+    }
+    
+    .gate-inputs-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    
+    .gate-input-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(15, 19, 25, 0.65);
+      border: 1px solid var(--border-glass);
+      padding: 0.9rem 1.5rem;
+      border-radius: 10px;
+    }
+    
+    .gate-input-label {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      color: var(--text-bright);
+      font-size: 1rem;
+    }
+    
+    .gate-toggle-btn {
+      border: none;
+      outline: none;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-muted);
+      border: 1px solid var(--border-glass);
+      padding: 0.45rem 1.1rem;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition-smooth);
+    }
+    
+    .gate-toggle-btn.active {
+      background: var(--accent-secondary-glow);
+      color: var(--accent-secondary);
+      border-color: var(--accent-secondary);
+      box-shadow: 0 0 10px rgba(6, 182, 212, 0.2);
+    }
+    
+    .gate-canvas-visualizer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    
+    .gate-svg-box {
+      width: 220px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .gate-output-box {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid var(--color-success);
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-family: 'Outfit', sans-serif;
+    }
+    
+    .gate-output-val {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--color-success);
+    }
+    
+    /* Analytics Page View */
+    .analytics-summary-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+    
+    .analytics-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      box-shadow: var(--shadow-premium);
+    }
+    
+    .analytics-card-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    
+    .analytics-card-val {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: var(--text-bright);
+    }
+    
+    .analytics-card-val.color-p { color: var(--accent-primary-hover); }
+    .analytics-card-val.color-s { color: var(--accent-secondary); }
+    .analytics-card-val.color-g { color: var(--color-success); }
+    
+    .analytics-topics-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      background: var(--bg-card);
+      border: 1px solid var(--border-glass);
+      padding: 2rem;
+      border-radius: 16px;
+    }
+    
+    .analytics-topic-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .analytics-topic-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.88rem;
+      font-weight: 600;
+      gap: 1rem;
+    }
+    
+    .analytics-progress-bar-bg {
+      height: 8px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    
+    .analytics-progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      border-radius: 99px;
+      transition: var(--transition-smooth);
+    }
+    
+    code-block {
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(0, 0, 0, 0.4);
+      padding: 0.2rem 0.4rem;
+      border-radius: 4px;
+      font-size: 0.85rem;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--accent-secondary);
+    }
+
+    /* ── Welcome stats banner (Exam Center top) ── */
+    .welcome-banner {
+      background: linear-gradient(135deg, rgba(197,160,89,0.07) 0%, rgba(14,17,23,0) 70%);
+      border: 1px solid rgba(197,160,89,0.14);
+      border-radius: 18px;
+      padding: 1.6rem 2rem;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
+    }
+    .welcome-banner::after {
+      content: '📚';
+      position: absolute;
+      right: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 4rem;
+      opacity: 0.06;
+      pointer-events: none;
+      filter: blur(1px);
+    }
+    .welcome-banner-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .welcome-banner-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--text-bright);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .welcome-banner-sub {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+    }
+    .welcome-banner-sub strong {
+      color: var(--accent-primary-hover);
+    }
+    .welcome-stats-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .w-stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgba(0,0,0,0.3);
+      border: 1px solid rgba(197,160,89,0.12);
+      border-radius: 12px;
+      padding: 0.7rem 1.1rem;
+      min-width: 72px;
+    }
+    .w-stat-val {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #f3e5ab, #c5a059);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1;
+    }
+    .w-stat-lbl {
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-top: 0.25rem;
+    }
+
+    /* ── Mobile header polish ── */
+    .mobile-header-logo-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.05rem;
+    }
+    .mobile-logo {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #c5a059, #f3e5ab, #aa7c11);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .mobile-logo-sub {
+      font-size: 0.55rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+    }
+
+    /* ── Header block improvements ── */
+    .page-header-row {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .header-block {
+      margin-bottom: 0;
+    }
+    .header-block::after {
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), transparent);
+      width: 80px;
+    }
+
+    /* ── Filter bar pill tabs for year ── */
+    .year-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.2rem;
+    }
+    .year-pill {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.35rem 0.85rem;
+      border-radius: 99px;
+      cursor: pointer;
+      border: 1px solid var(--border-glass);
+      color: var(--text-muted);
+      background: transparent;
+      transition: var(--transition-smooth);
+    }
+    .year-pill:hover {
+      color: var(--text-main);
+      border-color: rgba(197,160,89,0.3);
+    }
+    .year-pill.active {
+      background: var(--accent-primary);
+      color: var(--text-bright);
+      border-color: var(--accent-primary);
+      box-shadow: 0 2px 12px var(--accent-glow);
+    }
+    
+    /* ----------------------------------------------------
+       RESPONSIVE MEDIA QUERIES (COMPLETE SYSTEM)
+       ---------------------------------------------------- */
+
+    @media (max-width: 1280px) {
+      .lessons-layout {
+        grid-template-columns: 210px 1fr 190px;
+        gap: 1.4rem;
+      }
+      .lesson-reading-area { padding: 2rem 2.2rem 2.5rem; }
+      .lesson-chapter-header { padding: 2rem 2.2rem 1.6rem; }
+      .lesson-nav-footer { padding: 1.2rem 2.2rem; }
+    }
+
+    @media (max-width: 1100px) {
+      .lessons-layout {
+        grid-template-columns: 200px 1fr;
+      }
+      .lesson-toc-card { display: none !important; }
+      .lesson-toc-mobile-btn { display: flex !important; }
+    }
+
+    @media (max-width: 1023px) {
+      .app-container {
+        grid-template-columns: 1fr;
+      }
+
+      .mobile-header {
+        display: flex;
+      }
+
+      aside {
+        position: fixed;
+        left: -290px;
+        top: 0;
+        bottom: 0;
+        width: 290px;
+        height: 100vh;
+        z-index: 200;
+        box-shadow: 16px 0 48px rgba(0, 0, 0, 0.7);
+      }
+
+      aside.mobile-open {
+        left: 0;
+      }
+
+      main {
+        padding: 1.5rem 1.8rem;
+        max-height: calc(100vh - 60px);
+      }
+
+      .header-title { font-size: 1.9rem; }
+      .welcome-banner { padding: 1.2rem 1.4rem; }
+      .welcome-banner::after { display: none; }
+
+      /* Quiz meta badges wrap properly */
+      .quiz-meta { gap: 0.5rem; }
+      .quiz-badge { font-size: 0.72rem; }
+
+      /* Labs grid collapses */
+      .labs-grid { grid-template-columns: 1fr; }
+      .lessons-sidebar.labs-sidebar {
+        position: static;
+        flex-direction: row !important;
+        overflow-x: auto;
+        gap: 0.5rem;
+        padding: 0.6rem;
+        border-radius: 12px;
+      }
+    }
+
+    @media (max-width: 767px) {
+      main {
+        padding: 1rem 1rem;
+      }
+
+      .welcome-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1.1rem 1.1rem;
+      }
+      .welcome-stats-row {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .w-stat { flex: 1; }
+      .welcome-banner-title { font-size: 1rem; }
+
+      .header-block {
+        margin-bottom: 1.5rem;
+      }
+
+      .header-title {
+        font-size: 1.55rem;
+      }
+
+      /* Filter bar — stack all groups vertically */
+      .filter-bar {
+        padding: 0.9rem;
+        gap: 0.8rem;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .filter-group {
+        width: 100%;
+      }
+
+      .input-premium {
+        min-width: unset;
+        width: 100%;
+      }
+
+      .select-premium {
+        width: 100%;
+        min-width: unset;
+      }
+
+      .btn-toggle-group {
+        width: 100%;
+      }
+
+      .btn-toggle {
+        flex-grow: 1;
+        text-align: center;
+      }
+
+      /* Quiz container */
+      .quiz-active-container {
+        padding: 1.2rem 1rem;
+        border-radius: 14px;
+      }
+
+      .quiz-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.4rem;
+        padding-bottom: 1rem;
+      }
+
+      .question-title {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 1.2rem;
+      }
+
+      .option-card {
+        padding: 0.85rem 1rem;
+        font-size: 0.87rem;
+      }
+
+      .navigation-controls {
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin-top: 1.5rem;
+      }
+
+      .navigation-controls .btn-premium {
+        flex: 1;
+        min-width: 0;
+        padding: 0.7rem 0.8rem;
+        font-size: 0.82rem;
+        justify-content: center;
+      }
+
+      /* Study cards */
+      .study-card {
+        padding: 1.2rem 1rem;
+      }
+
+      /* Lessons layout - full single column */
+      .lessons-layout {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+      }
+
+      .lesson-toc-card { display: none !important; }
+      .lesson-toc-mobile-btn { display: flex !important; }
+
+      .lessons-sidebar {
+        position: static;
+        flex-direction: row !important;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 0.5rem 0.6rem;
+        gap: 0.5rem;
+        border-radius: 12px;
+        scrollbar-width: none;
+      }
+      .lessons-sidebar::-webkit-scrollbar { display: none; }
+
+      .lessons-sidebar-label { display: none; }
+
+      .lesson-selector-item {
+        display: inline-block;
+        padding: 0.55rem 0.9rem;
+        font-size: 0.78rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .lesson-chapter-header {
+        padding: 1.4rem 1.2rem 1.2rem;
+      }
+      .lesson-chapter-title {
+        font-size: 1.4rem;
+      }
+      .lesson-reading-area {
+        padding: 1.5rem 1.2rem 2rem;
+      }
+      .lesson-nav-footer {
+        padding: 1rem 1.2rem;
+      }
+      .lesson-nav-btn {
+        flex: 1;
+        justify-content: center;
+        font-size: 0.8rem;
+        padding: 0.55rem 0.8rem;
+      }
+
+      /* Markdown content mobile */
+      .markdown-content h1 { font-size: 1.5rem; }
+      .markdown-content h2 { font-size: 1.1rem; padding: 0.6rem 0.8rem; }
+      .markdown-content h3 { font-size: 1rem; }
+      .markdown-content p,
+      .markdown-content ul li,
+      .ordered-list-item { font-size: 0.92rem; }
+
+      /* Labs */
+      .labs-grid {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+      }
+
+      .lessons-sidebar.labs-sidebar-applied {
+        position: static;
+        flex-direction: row !important;
+        overflow-x: auto;
+        padding: 0.5rem;
+        gap: 0.5rem;
+        border-radius: 12px;
+        scrollbar-width: none;
+      }
+
+      #interactive-labs .lessons-sidebar {
+        position: static;
+        flex-direction: row !important;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 0.5rem 0.6rem;
+        gap: 0.5rem;
+        border-radius: 12px;
+        scrollbar-width: none;
+      }
+      #interactive-labs .lessons-sidebar::-webkit-scrollbar { display: none; }
+      #interactive-labs .lesson-selector-item {
+        display: inline-block;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .lab-widget-card {
+        padding: 1.2rem 1rem;
+        border-radius: 14px;
+      }
+
+      .logic-interactive-board {
+        grid-template-columns: 1fr;
+        padding: 1.2rem 1rem;
+        gap: 1.5rem;
+      }
+
+      /* Process simulator */
+      .process-states-visualizer {
+        padding: 1.5rem 0.8rem;
+        gap: 0.5rem;
+      }
+
+      .state-node {
+        width: 68px;
+        height: 68px;
+        font-size: 0.7rem;
+      }
+
+      .state-connector {
+        min-width: 20px;
+      }
+
+      .simulator-controls {
+        gap: 0.6rem;
+      }
+      .simulator-controls .btn-premium {
+        padding: 0.6rem 0.9rem;
+        font-size: 0.8rem;
+      }
+
+      /* PCB table overflow */
+      .process-table-card {
+        overflow-x: auto;
+      }
+
+      /* Subnet calculator */
+      .subnet-inputs-row {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+      .subnet-binary-box {
+        overflow-x: auto;
+      }
+      .subnet-binary-row {
+        font-size: 0.78rem;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+
+      /* Analytics */
+      .analytics-summary-cards {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.8rem;
+      }
+      .analytics-card {
+        padding: 1rem;
+      }
+      .analytics-card-val {
+        font-size: 1.7rem;
+      }
+      .analytics-topics-list {
+        padding: 1.2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      main { padding: 0.8rem 0.8rem; }
+
+      .quiz-active-container { padding: 1rem 0.8rem; border-radius: 12px; }
+      .option-card { font-size: 0.84rem; padding: 0.75rem 0.8rem; }
+
+      .analytics-summary-cards { grid-template-columns: 1fr; }
+
+      .lesson-chapter-title { font-size: 1.25rem; }
+      .lesson-chapter-stats { gap: 0.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sidebar Overlay for Mobile nav closure -->
+  <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleMobileMenu()"></div>
+
+  <!-- Mobile Top Header Bar -->
+  <header class="mobile-header">
+    <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
+    <div class="mobile-header-logo-group">
+      <div class="mobile-logo">AL ICT Hub</div>
+      <div class="mobile-logo-sub">G.C.E. A/L Study Portal</div>
+    </div>
+    <div style="width: 28px;"></div>
+  </header>
+
+  <div class="app-container">
+    
+    <!-- Sidebar Navigation -->
+    <aside>
+
+      <!-- Brand strip -->
+      <div class="sidebar-brand">
+        <div class="logo-lockup">
+          <div class="logo-icon">🎓</div>
+          <div class="logo-text-group">
+            <div class="logo-title">AL ICT Hub</div>
+            <div class="logo-subtitle">G.C.E. A/L Study Portal</div>
+          </div>
+        </div>
+        <div class="logo-pill-row">
+          <span class="logo-pill logo-pill-gold">2015 – 2024</span>
+          <span class="logo-pill logo-pill-green">✓ Free Resource</span>
+        </div>
+      </div>
+
+      <!-- Creator identity card -->
+      <div class="creator-card">
+        <div class="creator-card-inner">
+          <div class="creator-avatar-wrap">
+            <div class="creator-avatar-ring"></div>
+            <div class="creator-avatar">JA</div>
+          </div>
+          <div class="creator-name">J. Abiraj</div>
+          <div class="creator-role">ICT Educator &amp; Content Creator</div>
+          <div class="creator-badge-row">
+            <span class="creator-badge creator-badge-degree">BSc(Hons) CS</span>
+            <span class="creator-badge creator-badge-verified">✓ Verified</span>
+          </div>
+        </div>
+        <div class="creator-stats">
+          <div class="c-stat">
+            <span class="c-stat-val">500</span>
+            <span class="c-stat-lbl">MCQs</span>
+          </div>
+          <div class="c-stat">
+            <span class="c-stat-val">10</span>
+            <span class="c-stat-lbl">Papers</span>
+          </div>
+          <div class="c-stat">
+            <span class="c-stat-val">5</span>
+            <span class="c-stat-lbl">Units</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation -->
+      <div class="nav-section">
+        <div class="nav-section-label">Navigation</div>
+        <ul class="nav-menu">
+          <li class="nav-item active" onclick="switchTab('exam-center')">
+            <span class="nav-icon">📝</span>
+            <span class="nav-item-text">Exam Center</span>
+            <span class="nav-item-badge">500 Q</span>
+          </li>
+          <li class="nav-item" onclick="switchTab('lesson-notes')">
+            <span class="nav-icon">📚</span>
+            <span class="nav-item-text">Lesson Notes</span>
+            <span class="nav-item-badge">5 Units</span>
+          </li>
+          <li class="nav-item" onclick="switchTab('interactive-labs')">
+            <span class="nav-icon">🔬</span>
+            <span class="nav-item-text">Interactive Labs</span>
+            <span class="nav-item-badge">3 Tools</span>
+          </li>
+          <li class="nav-item" onclick="switchTab('analytics')">
+            <span class="nav-icon">📊</span>
+            <span class="nav-item-text">Performance</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Footer -->
+      <div class="nav-footer">
+        <div class="nav-footer-line">
+          <div class="nav-footer-dot"></div>
+          <span>G.C.E. A/L ICT &mdash; Sri Lanka</span>
+        </div>
+        <div class="nav-footer-line">
+          <div class="nav-footer-dot"></div>
+          <span>New Syllabus &bull; 2019 Onwards</span>
+        </div>
+        <div class="nav-footer-line" style="margin-top:0.3rem;">
+          <span class="nav-footer-line-accent">© 2025 J. Abiraj</span>
+        </div>
+      </div>
+
+    </aside>
+    
+    <!-- Main Window -->
+    <main>
+      
+      <!-- EXAM CENTER PAGE -->
+      <section id="exam-center" class="page-view active">
+
+        <!-- Welcome stats banner -->
+        <div class="welcome-banner">
+          <div class="welcome-banner-left">
+            <div class="welcome-banner-title">🎯 G.C.E. A/L ICT Exam Center</div>
+            <div class="welcome-banner-sub">Curated by <strong>J. Abiraj</strong> &mdash; ICT Educator &amp; Content Creator &bull; BSc(Hons) CS</div>
+          </div>
+          <div class="welcome-stats-row">
+            <div class="w-stat">
+              <span class="w-stat-val">500</span>
+              <span class="w-stat-lbl">MCQs</span>
+            </div>
+            <div class="w-stat">
+              <span class="w-stat-val">10</span>
+              <span class="w-stat-lbl">Years</span>
+            </div>
+            <div class="w-stat">
+              <span class="w-stat-val">9</span>
+              <span class="w-stat-lbl">Topics</span>
+            </div>
+            <div class="w-stat">
+              <span class="w-stat-val">Free</span>
+              <span class="w-stat-lbl">Access</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="header-block">
+          <h2 class="header-title">Exam Center</h2>
+          <p class="header-desc">Practice past papers interactively with scoring, instant feedback, and detailed explanations.</p>
+        </div>
+        
+        <!-- Filter and Mode Controls -->
+        <div class="filter-bar">
+          <div class="filter-group">
+            <span class="filter-label">Exam Year</span>
+            <select id="filter-year" class="select-premium" onchange="loadQuestions()">
+              <option value="all">All Years</option>
+              <option value="2024">2024 Paper</option>
+              <option value="2023">2023 Paper</option>
+              <option value="2022">2022 Paper</option>
+              <option value="2021">2021 Paper</option>
+              <option value="2020">2020 Paper</option>
+              <option value="2019">2019 Paper</option>
+              <option value="2018">2018 Paper</option>
+              <option value="2017">2017 Paper</option>
+              <option value="2016">2016 Paper</option>
+              <option value="2015">2015 Paper</option>
+            </select>
+          </div>
+          
+          <div class="filter-group">
+            <span class="filter-label">Topic / Unit</span>
+            <select id="filter-topic" class="select-premium" onchange="loadQuestions()">
+              <option value="all">All Topics</option>
+              <option value="Computer Architecture & Logic Gates">Computer Architecture & Logic Gates</option>
+              <option value="Number Systems & Data Representation">Number Systems & Data Representation</option>
+              <option value="Operating Systems">Operating Systems</option>
+              <option value="Networking & Data Comm">Networking & Data Comm</option>
+              <option value="Database Management">Database Management</option>
+              <option value="Programming (Python)">Programming (Python)</option>
+              <option value="Web Development">Web Development</option>
+              <option value="Systems Analysis & Design">Systems Analysis & Design</option>
+              <option value="IoT & New Trends">IoT & New Trends</option>
+            </select>
+          </div>
+          
+          <div class="filter-group">
+            <span class="filter-label">Search Keyword</span>
+            <input type="text" id="filter-search" class="input-premium" placeholder="Search question text..." oninput="loadQuestions()">
+          </div>
+          
+          <div class="filter-group" style="margin-left: auto;">
+            <span class="filter-label">Study Mode</span>
+            <div class="btn-toggle-group">
+              <button id="mode-quiz" class="btn-toggle active" onclick="setMode('quiz')">Quiz Practice</button>
+              <button id="mode-study" class="btn-toggle" onclick="setMode('study')">Study Sheet</button>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Questions Area -->
+        <div id="questions-area">
+          
+          <!-- QUIZ MODE -->
+          <div id="quiz-mode-view" class="quiz-active-container">
+            <div class="quiz-meta">
+              <span id="quiz-question-number" class="quiz-badge">Question 1 of 50</span>
+              <span id="quiz-question-year" class="quiz-badge" style="background:var(--accent-secondary-glow); color:var(--accent-secondary);">Year: 2024</span>
+              <span id="quiz-question-topic" class="quiz-badge" style="background:rgba(255,255,255,0.05); color:var(--text-muted);">Topic: Python</span>
+              <span id="quiz-score-keeper" class="quiz-score">Score: 0 / 0</span>
+            </div>
+            
+            <div class="question-box">
+              <div id="quiz-question-text" class="question-title">Loading Question...</div>
+              <div id="quiz-options-list" class="options-list">
+                <!-- Javascript will render options here -->
+              </div>
+            </div>
+            
+            <!-- Explanation Container -->
+            <div id="quiz-explanation" class="explanation-box" style="display: none;">
+              <h4 class="explanation-title">💡 Explanation & Concepts</h4>
+              <p id="quiz-explanation-text" class="explanation-text"></p>
+            </div>
+            
+            <div class="navigation-controls">
+              <button id="quiz-prev-btn" class="btn-premium btn-outline" onclick="navigateQuiz(-1)">← Previous</button>
+              <button id="quiz-reset-btn" class="btn-premium btn-outline" onclick="resetQuizScore()">Reset Score</button>
+              <button id="quiz-next-btn" class="btn-premium" onclick="navigateQuiz(1)">Next Question →</button>
+            </div>
+          </div>
+          
+          <!-- STUDY SHEET MODE -->
+          <div id="study-mode-view" class="study-grid" style="display: none;">
+            <!-- Javascript will render study cards here -->
+          </div>
+          
+        </div>
+      </section>
+      
+      <!-- LESSON NOTES PAGE -->
+      <section id="lesson-notes" class="page-view">
+        <div class="header-block">
+          <h2 class="header-title">Lesson Notes</h2>
+          <p class="header-desc">Study notes compiled from official G.C.E. A/L ICT lesson books, structured for exam preparation.</p>
+        </div>
+
+        <div class="lessons-layout">
+          <!-- Unit Selector Sidebar -->
+          <div class="lessons-sidebar" id="lesson-selector-sidebar">
+            <div class="lessons-sidebar-label">📚 Units</div>
+            <!-- Sidebar selectors will populate here -->
+          </div>
+
+          <!-- Main Book Body -->
+          <div class="lesson-body-card">
+            <div id="lesson-chapter-header-area">
+              <!-- Chapter header rendered by JS -->
+            </div>
+            <div class="lesson-reading-area">
+              <div class="lesson-progress-bar"><div class="lesson-progress-fill" id="lesson-progress-fill"></div></div>
+              <div id="lesson-markdown-body" class="markdown-content">
+                <p style="color:var(--text-muted); text-align:center; padding: 3rem 0;">Select a unit from the sidebar to start reading.</p>
+              </div>
+            </div>
+            <div class="lesson-nav-footer" id="lesson-nav-footer" style="display:none;">
+              <button class="lesson-nav-btn" id="lesson-prev-btn" onclick="navigateLesson(-1)">← Previous Unit</button>
+              <span id="lesson-nav-label" style="font-size:0.8rem; color:var(--text-muted);"></span>
+              <button class="lesson-nav-btn" id="lesson-next-btn" onclick="navigateLesson(1)">Next Unit →</button>
+            </div>
+          </div>
+
+          <!-- TOC Sidebar (hidden on small screens) -->
+          <div class="lesson-toc-card" id="lesson-toc-container" style="display: none;">
+            <div class="toc-title">On This Page</div>
+            <div id="lesson-toc-list" class="toc-list">
+              <!-- TOC links populate here -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Mobile floating TOC button -->
+        <button class="lesson-toc-mobile-btn" id="lesson-toc-mobile-btn" onclick="toggleMobileTOC()" title="Table of Contents">☰</button>
+
+        <!-- Mobile TOC Drawer -->
+        <div class="lesson-toc-drawer" id="lesson-toc-drawer">
+          <div class="lesson-toc-drawer-header">
+            <span style="font-weight:700; font-size:0.9rem; color:var(--text-bright);">On This Page</span>
+            <button class="lesson-toc-drawer-close" onclick="toggleMobileTOC()">✕</button>
+          </div>
+          <div id="lesson-toc-drawer-list" class="toc-list">
+            <!-- Mobile TOC items populated by JS -->
+          </div>
+        </div>
+      </section>
+      
+      <!-- INTERACTIVE LABS PAGE -->
+      <section id="interactive-labs" class="page-view">
+        <div class="header-block">
+          <h2 class="header-title">Interactive Learning Labs</h2>
+          <p class="header-desc">Interact with visual simulators specifically built to help resolve logic, networking, and scheduling principles.</p>
+        </div>
+        
+        <div class="labs-grid">
+          <div class="lessons-sidebar">
+            <div class="lesson-selector-item active" id="lab-tab-gate" onclick="switchLabTab('gate')">Logic Gate Playground</div>
+            <div class="lesson-selector-item" id="lab-tab-process" onclick="switchLabTab('process')">OS Process Scheduler</div>
+            <div class="lesson-selector-item" id="lab-tab-subnet" onclick="switchLabTab('subnet')">IP Subnet Calculator</div>
+          </div>
+          
+          <div class="lab-content-area">
+            
+            <!-- LOGIC GATE PLAYGROUND -->
+            <div id="lab-widget-gate" class="lab-widget-card">
+              <h3 style="margin-bottom: 1rem; color:var(--text-bright);">Logic Gate Playground</h3>
+              <p style="color:var(--text-muted); margin-bottom: 2rem; font-size:0.9rem;">
+                Select a logic gate, toggle the inputs A and B (and C where applicable), and view the resulting boolean output.
+              </p>
+              
+              <div class="logic-playground-container">
+                <div class="logic-interactive-board">
+                  <div class="gate-inputs-panel">
+                    <div class="gate-input-row">
+                      <span class="gate-input-label">Gate Type</span>
+                      <select id="gate-select-type" class="select-premium" onchange="calculateGateOutput()">
+                        <option value="AND">AND Gate</option>
+                        <option value="OR">OR Gate</option>
+                        <option value="NOT">NOT Gate</option>
+                        <option value="NAND">NAND Gate</option>
+                        <option value="NOR">NOR Gate</option>
+                        <option value="XOR">XOR Gate</option>
+                      </select>
+                    </div>
+                    
+                    <div class="gate-input-row">
+                      <span class="gate-input-label">Input A</span>
+                      <button id="gate-input-a" class="gate-toggle-btn active" onclick="toggleGateInput('a')">1</button>
+                    </div>
+                    
+                    <div id="gate-input-b-row" class="gate-input-row">
+                      <span class="gate-input-label">Input B</span>
+                      <button id="gate-input-b" class="gate-toggle-btn" onclick="toggleGateInput('b')">0</button>
+                    </div>
+                  </div>
+                  
+                  <div class="gate-canvas-visualizer">
+                    <div class="gate-svg-box" id="gate-svg-wrapper">
+                      <!-- SVG drawn dynamically -->
+                    </div>
+                    
+                    <div class="gate-output-box">
+                      <span style="font-weight:700; color:var(--text-muted);">Output Q = </span>
+                      <span id="gate-output-val" class="gate-output-val">0</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- PROCESS SCHEDULER SIMULATOR -->
+            <div id="lab-widget-process" class="lab-widget-card" style="display: none;">
+              <h3 style="margin-bottom: 1rem; color:var(--text-bright);">OS Process Scheduler & State Transition Simulator</h3>
+              <p style="color:var(--text-muted); margin-bottom: 2rem; font-size:0.9rem;">
+                Create processes, dispatch them to the CPU, interrupt them, or block them on I/O. Observe how they transit through the 5-state process lifecycle.
+              </p>
+              
+              <div class="process-simulator-container">
+                <!-- State visualizer -->
+                <div class="process-states-visualizer">
+                  <div id="node-NEW" class="state-node active">
+                    <span class="state-node-title">New</span>
+                    <span id="pcount-NEW" class="state-node-processes">0 P</span>
+                  </div>
+                  <div id="conn-1" class="state-connector">
+                    <span class="state-connector-label">Admit</span>
+                  </div>
+                  
+                  <div id="node-READY" class="state-node">
+                    <span class="state-node-title">Ready</span>
+                    <span id="pcount-READY" class="state-node-processes">0 P</span>
+                  </div>
+                  <div id="conn-2" class="state-connector">
+                    <span class="state-connector-label">Dispatch</span>
+                  </div>
+                  
+                  <div id="node-RUNNING" class="state-node">
+                    <span class="state-node-title">Running</span>
+                    <span id="pcount-RUNNING" class="state-node-processes">0 P</span>
+                  </div>
+                  
+                  <div id="conn-3" class="state-connector">
+                    <span class="state-connector-label">Exit</span>
+                  </div>
+                  <div id="node-TERMINATED" class="state-node">
+                    <span class="state-node-title">Exit</span>
+                    <span id="pcount-TERMINATED" class="state-node-processes">0 P</span>
+                  </div>
+                </div>
+                
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                  <!-- Wait and Interrupt pathways -->
+                  <div style="background:rgba(15,19,25,0.4); border:1px solid var(--border-glass); padding:1rem; border-radius:12px; font-size:0.8rem; display:flex; gap:1.5rem; width: 100%;">
+                    <div>🔄 **Interrupt**: Running ➔ Ready (e.g. timeout / preemption)</div>
+                    <div>⏳ **I/O Wait**: Running ➔ Waiting ➔ Ready</div>
+                  </div>
+                </div>
+                
+                <div class="simulator-controls">
+                  <button class="btn-premium" onclick="createProcessSim()">Create New Process</button>
+                  <button class="btn-premium btn-outline" id="btn-dispatch-sim" onclick="dispatchProcessSim()" disabled>Dispatch to CPU</button>
+                  <button class="btn-premium btn-outline" id="btn-interrupt-sim" onclick="interruptProcessSim()" disabled>Interrupt (Timeout)</button>
+                  <button class="btn-premium btn-outline" id="btn-block-sim" onclick="blockProcessSim()" disabled>Block (I/O Wait)</button>
+                  <button class="btn-premium btn-outline" id="btn-unblock-sim" onclick="unblockProcessSim()" disabled>I/O Finished</button>
+                  <button class="btn-premium btn-outline" id="btn-exit-sim" onclick="exitProcessSim()" disabled>Terminate Process</button>
+                </div>
+                
+                <!-- Process List Table -->
+                <div class="process-table-card">
+                  <div class="process-table-title">Process Control Blocks (PCB Table)</div>
+                  <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.85rem;">
+                    <thead>
+                      <tr style="border-bottom:1.5px solid var(--border-glass); color:var(--text-bright);">
+                        <th style="padding:0.5rem 1rem;">PID</th>
+                        <th style="padding:0.5rem 1rem;">State</th>
+                        <th style="padding:0.5rem 1rem;">Program Counter</th>
+                        <th style="padding:0.5rem 1rem;">CPUTime Used</th>
+                      </tr>
+                    </thead>
+                    <tbody id="sim-pcb-table-body">
+                      <tr>
+                        <td colspan="4" style="padding:1rem; text-align:center; color:var(--text-muted);">No active processes. Click "Create New Process" to add one.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+                <!-- Gantt Chart -->
+                <div class="gantt-chart-container">
+                  <div class="gantt-title">CPU Gantt Chart / Timeline</div>
+                  <div class="gantt-bar-flex" id="gantt-bar-wrapper">
+                    <!-- Gantt blocks dynamically loaded -->
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- IP SUBNET CALCULATOR -->
+            <div id="lab-widget-subnet" class="lab-widget-card" style="display: none;">
+              <h3 style="margin-bottom: 1rem; color:var(--text-bright);">IP Network Subnetting Calculator</h3>
+              <p style="color:var(--text-muted); margin-bottom: 2rem; font-size:0.9rem;">
+                Calculate network parameters, dotted decimal representations, broadcast addresses, and binary network-host boundaries.
+              </p>
+              
+              <div class="subnet-calculator-container">
+                <div class="subnet-inputs-row">
+                  <div class="filter-group">
+                    <span class="filter-label">IP Address</span>
+                    <input type="text" id="subnet-ip-input" class="input-premium" value="192.168.100.45" oninput="calculateSubnet()" style="min-width: 180px;">
+                  </div>
+                  
+                  <div class="filter-group">
+                    <span class="filter-label">CIDR Prefix (e.g. /27)</span>
+                    <select id="subnet-prefix-select" class="select-premium" onchange="calculateSubnet()">
+                      <option value="24">/24 (255.255.255.0)</option>
+                      <option value="25">/25 (255.255.255.128)</option>
+                      <option value="26">/26 (255.255.255.192)</option>
+                      <option value="27" selected>/27 (255.255.255.224)</option>
+                      <option value="28">/28 (255.255.255.240)</option>
+                      <option value="29">/29 (255.255.255.248)</option>
+                      <option value="30">/30 (255.255.255.252)</option>
+                    </select>
+                  </div>
+                </div>
+                
+                <div class="subnet-output-grid">
+                  <div class="subnet-card">
+                    <span class="subnet-card-label">Network Address</span>
+                    <span id="sub-network-val" class="subnet-card-val">192.168.100.0</span>
+                  </div>
+                  <div class="subnet-card">
+                    <span class="subnet-card-label">Broadcast Address</span>
+                    <span id="sub-broadcast-val" class="subnet-card-val">192.168.100.31</span>
+                  </div>
+                  <div class="subnet-card">
+                    <span class="subnet-card-label">Usable Host Range</span>
+                    <span id="sub-range-val" class="subnet-card-val">192.168.100.1 - 192.168.100.30</span>
+                  </div>
+                  <div class="subnet-card">
+                    <span class="subnet-card-label">Total Usable Hosts</span>
+                    <span id="sub-hosts-val" class="subnet-card-val" style="color:var(--color-success);">30</span>
+                  </div>
+                </div>
+                
+                <div class="subnet-binary-box">
+                  <h4 style="font-size:0.95rem; margin-bottom: 1rem; color:var(--text-bright);">Dotted Binary Address Boundaries</h4>
+                  <div class="subnet-binary-row">
+                    <span style="color:var(--text-muted);">IP Address:</span>
+                    <span id="bin-ip-val">11000000.10101000.01100100.00101101</span>
+                  </div>
+                  <div class="subnet-binary-row">
+                    <span style="color:var(--text-muted);">Subnet Mask:</span>
+                    <span id="bin-mask-val">11111111.11111111.11111111.11100000</span>
+                  </div>
+                  <div class="subnet-binary-row">
+                    <span style="color:var(--text-muted);">Network Boundary Split:</span>
+                    <span id="bin-split-val">
+                      <span class="binary-split-net">11000000.10101000.01100100.001</span>
+                      <span class="binary-split-host">01101</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+      </section>
+      
+      <!-- PERFORMANCE PORTAL PAGE -->
+      <section id="analytics" class="page-view">
+        <div class="header-block">
+          <h2 class="header-title">Performance Portal</h2>
+          <p class="header-desc">Track your syllabus mastery, quiz scores, and detailed strengths by subject area.</p>
+        </div>
+        
+        <div class="analytics-summary-cards">
+          <div class="analytics-card">
+            <span class="analytics-card-label">Total Questions Solved</span>
+            <span id="anal-solved" class="analytics-card-val color-p">0</span>
+          </div>
+          <div class="analytics-card">
+            <span class="analytics-card-label">Accuracy Rate</span>
+            <span id="anal-accuracy" class="analytics-card-val color-s">0%</span>
+          </div>
+          <div class="analytics-card">
+            <span class="analytics-card-label">Mastery Level</span>
+            <span id="anal-mastery" class="analytics-card-val color-g">Beginner</span>
+          </div>
+        </div>
+        
+        <div class="analytics-topics-list">
+          <h3 style="color:var(--text-bright); margin-bottom: 1.5rem;">Syllabus Topic Mastery</h3>
+          <div id="analytics-mastery-list" style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <!-- Populate dynamically -->
+          </div>
+        </div>
+      </section>
+      
+    </main>
+    
+  </div>
+
+  <!-- Load raw data.js file -->
+  <script src="data.js"></script>
+  
+  <!-- JavaScript Application Logic -->
+  <script>
+    // Application State
+    let state = {
+      activeTab: 'exam-center',
+      mode: 'quiz', // 'quiz' or 'study'
+      selectedYear: 'all',
+      selectedTopic: 'all',
+      searchQuery: '',
+      
+      // MCQ Active Quiz State
+      quizIndex: 0,
+      quizFilteredQuestions: [],
+      quizAnswers: {}, // key: question key string (e.g. '2024-1'), value: { selectedIndex, isCorrect }
+      quizScore: { correct: 0, total: 0 },
+      
+      // Lesson State
+      activeLessonId: 5,
+      
+      // Lab: Logic Gate state
+      gateInputA: 1,
+      gateInputB: 0,
+      
+      // Lab: OS Scheduler State
+      processes: [], // array of { pid, state, pc, cpuTime }
+      pidCounter: 100,
+      cpuRunningPid: null,
+      ganttHistory: [], // array of { pid, duration }
+      simTimer: null
+    };
+
+    // Initialize Web Application
+    window.addEventListener('DOMContentLoaded', () => {
+      // Check if data is available
+      if (typeof ALICT_DATA === 'undefined') {
+        alert("Warning: data.js file is missing. Please build the database by running build_data.py first.");
+        return;
+      }
+      
+      // Initialize tabs
+      switchTab('exam-center');
+      
+      // Initialize filters
+      loadQuestions();
+      
+      // Initialize lesson list
+      loadLessonsSidebar();
+      
+      // Initialize logic gate
+      calculateGateOutput();
+      
+      // Initialize Subnet calculator
+      calculateSubnet();
+    });
+
+    // Mobile Sidebar toggle function
+    function toggleMobileMenu() {
+      const sidebar = document.querySelector('aside');
+      const overlay = document.getElementById('sidebar-overlay');
+      sidebar.classList.toggle('mobile-open');
+      overlay.classList.toggle('active');
+    }
+
+    // Navigation Tabs Router
+    function switchTab(tabId) {
+      state.activeTab = tabId;
+      
+      // UI navigation highlight
+      document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+      const activeNavIdx = ['exam-center', 'lesson-notes', 'interactive-labs', 'analytics'].indexOf(tabId);
+      if (activeNavIdx !== -1) {
+        document.querySelectorAll('.nav-item')[activeNavIdx].classList.add('active');
+      }
+      
+      // Show page view
+      document.querySelectorAll('.page-view').forEach(el => el.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      
+      // Close mobile navigation drawer if open
+      document.querySelector('aside').classList.remove('mobile-open');
+      document.getElementById('sidebar-overlay').classList.remove('active');
+      
+      // Trigger side behaviors
+      if (tabId === 'analytics') {
+        renderPerformanceStats();
+      }
+    }
+
+    // Toggle Modes (Quiz vs Study Sheet)
+    function setMode(mode) {
+      state.mode = mode;
+      document.getElementById('mode-quiz').classList.toggle('active', mode === 'quiz');
+      document.getElementById('mode-study').classList.toggle('active', mode === 'study');
+      
+      document.getElementById('quiz-mode-view').style.display = mode === 'quiz' ? 'block' : 'none';
+      document.getElementById('study-mode-view').style.display = mode === 'study' ? 'flex' : 'none';
+      
+      loadQuestions();
+    }
+
+    // Load and filter MCQ questions from ALICT_DATA
+    function loadQuestions() {
+      state.selectedYear = document.getElementById('filter-year').value;
+      state.selectedTopic = document.getElementById('filter-topic').value;
+      state.searchQuery = document.getElementById('filter-search').value.toLowerCase().trim();
+      
+      let filtered = [];
+      
+      ALICT_DATA.papers.forEach(p => {
+        if (state.selectedYear !== 'all' && p.year.toString() !== state.selectedYear) {
+          return;
+        }
+        
+        p.questions.forEach(q => {
+          if (state.selectedTopic !== 'all' && q.topic !== state.selectedTopic) {
+            return;
+          }
+          
+          if (state.searchQuery) {
+            const inText = q.text.toLowerCase().includes(state.searchQuery);
+            const inOpts = q.options.some(o => o.toLowerCase().includes(state.searchQuery));
+            if (!inText && !inOpts) return;
+          }
+          
+          filtered.push({
+            ...q,
+            year: p.year,
+            key: `${p.year}-${q.number}`
+          });
+        });
+      });
+      
+      state.quizFilteredQuestions = filtered;
+      
+      if (state.mode === 'quiz') {
+        if (state.quizIndex >= filtered.length) {
+          state.quizIndex = 0;
+        }
+        renderQuizQuestion();
+      } else {
+        renderStudySheet();
+      }
+    }
+
+    // Render Quiz Mode Question
+    function renderQuizQuestion() {
+      const qBox = document.getElementById('quiz-question-text');
+      const oList = document.getElementById('quiz-options-list');
+      const expBox = document.getElementById('quiz-explanation');
+      const expText = document.getElementById('quiz-explanation-text');
+      
+      const prevBtn = document.getElementById('quiz-prev-btn');
+      const nextBtn = document.getElementById('quiz-next-btn');
+      
+      const qNumBadge = document.getElementById('quiz-question-number');
+      const qYearBadge = document.getElementById('quiz-question-year');
+      const qTopicBadge = document.getElementById('quiz-question-topic');
+      
+      if (state.quizFilteredQuestions.length === 0) {
+        qBox.innerText = "No questions match your filter criteria. Please change filters.";
+        oList.innerHTML = "";
+        expBox.style.display = "none";
+        qNumBadge.innerText = "Question 0 of 0";
+        prevBtn.disabled = true;
+        nextBtn.disabled = true;
+        return;
+      }
+      
+      prevBtn.disabled = state.quizIndex === 0;
+      nextBtn.disabled = state.quizIndex === state.quizFilteredQuestions.length - 1;
+      
+      const q = state.quizFilteredQuestions[state.quizIndex];
+      
+      qNumBadge.innerText = `Question ${state.quizIndex + 1} of ${state.quizFilteredQuestions.length}`;
+      qYearBadge.innerText = `Year: ${q.year}`;
+      qTopicBadge.innerText = `Topic: ${q.topic}`;
+      
+      qBox.innerText = `${q.number}. ${q.text}`;
+      
+      const previousAnswer = state.quizAnswers[q.key];
+      
+      oList.innerHTML = "";
+      q.options.forEach((optText, idx) => {
+        const optionIndex = idx + 1;
+        const optCard = document.createElement('div');
+        optCard.className = 'option-card';
+        
+        optCard.innerHTML = `
+          <div class="option-number">${optionIndex}</div>
+          <div class="option-text">${escapeHtml(optText)}</div>
+        `;
+        
+        if (previousAnswer) {
+          if (optionIndex === q.answer) {
+            optCard.classList.add('correct');
+          } else if (optionIndex === previousAnswer.selectedIndex) {
+            optCard.classList.add('incorrect');
+          }
+        } else {
+          optCard.addEventListener('click', () => submitQuizAnswer(q, optionIndex));
+        }
+        
+        oList.appendChild(optCard);
+      });
+      
+      if (previousAnswer) {
+        expBox.style.display = "block";
+        expText.innerHTML = formatMarkdownSnippet(q.explanation);
+      } else {
+        expBox.style.display = "none";
+      }
+      
+      updateQuizScoreKeeper();
+    }
+
+    function submitQuizAnswer(question, selectedIndex) {
+      const isCorrect = selectedIndex === question.answer;
+      
+      state.quizAnswers[question.key] = {
+        selectedIndex: selectedIndex,
+        isCorrect: isCorrect
+      };
+      
+      recalculateScore();
+      renderQuizQuestion();
+    }
+
+    function recalculateScore() {
+      let correct = 0;
+      let total = 0;
+      
+      state.quizFilteredQuestions.forEach(q => {
+        if (state.quizAnswers[q.key]) {
+          total++;
+          if (state.quizAnswers[q.key].isCorrect) {
+            correct++;
+          }
+        }
+      });
+      
+      state.quizScore = { correct, total };
+    }
+
+    function updateQuizScoreKeeper() {
+      document.getElementById('quiz-score-keeper').innerText = `Score: ${state.quizScore.correct} / ${state.quizScore.total}`;
+    }
+
+    function resetQuizScore() {
+      state.quizFilteredQuestions.forEach(q => {
+        delete state.quizAnswers[q.key];
+      });
+      recalculateScore();
+      renderQuizQuestion();
+    }
+
+    function navigateQuiz(dir) {
+      const nextIdx = state.quizIndex + dir;
+      if (nextIdx >= 0 && nextIdx < state.quizFilteredQuestions.length) {
+        state.quizIndex = nextIdx;
+        renderQuizQuestion();
+      }
+    }
+
+    // Render Study Mode Sheet
+    function renderStudySheet() {
+      const grid = document.getElementById('study-mode-view');
+      grid.innerHTML = "";
+      
+      if (state.quizFilteredQuestions.length === 0) {
+        grid.innerHTML = `<div style="text-align:center; padding:3rem; color:var(--text-muted); border: 1px dashed var(--border-glass); border-radius:16px; width: 100%;">No questions match filters.</div>`;
+        return;
+      }
+      
+      state.quizFilteredQuestions.forEach(q => {
+        const card = document.createElement('div');
+        card.className = 'study-card';
+        
+        let badgeStyle = "background:var(--accent-glow); color:var(--accent-primary-hover);";
+        let yearStyle = "background:var(--accent-secondary-glow); color:var(--accent-secondary);";
+        
+        card.innerHTML = `
+          <div class="study-card-meta">
+            <span class="quiz-badge" style="${badgeStyle} font-size:0.75rem;">${q.topic}</span>
+            <span class="quiz-badge" style="${yearStyle} font-size:0.75rem;">Year: ${q.year} - Q${q.number}</span>
+          </div>
+          <div class="study-card-title">${q.number}. ${escapeHtml(q.text)}</div>
+          <div class="study-options">
+            ${q.options.map((o, idx) => `
+              <div class="study-option ${idx + 1 === q.answer ? 'correct' : ''}">
+                <div class="option-number">${idx + 1}</div>
+                <div>${escapeHtml(o)}</div>
+              </div>
+            `).join('')}
+          </div>
+          <div class="study-accordion-trigger" onclick="toggleStudyAccordion('${q.key}')">
+            <span>Show Explanation & Reference</span>
+            <span id="accordion-arrow-${q.key}">▼</span>
+          </div>
+          <div class="study-accordion-content" id="accordion-content-${q.key}">
+            <p class="explanation-text">${formatMarkdownSnippet(q.explanation)}</p>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function toggleStudyAccordion(key) {
+      const content = document.getElementById(`accordion-content-${key}`);
+      const arrow = document.getElementById(`accordion-arrow-${key}`);
+      if (content.classList.contains('open')) {
+        content.classList.remove('open');
+        arrow.innerText = '▼';
+      } else {
+        content.classList.add('open');
+        arrow.innerText = '▲';
+      }
+    }
+
+    // Performance Stats Tracker
+    function renderPerformanceStats() {
+      const solved = Object.keys(state.quizAnswers).length;
+      document.getElementById('anal-solved').innerText = solved;
+      
+      let correct = 0;
+      Object.values(state.quizAnswers).forEach(ans => {
+        if (ans.isCorrect) correct++;
+      });
+      const accuracy = solved > 0 ? Math.round((correct / solved) * 100) : 0;
+      document.getElementById('anal-accuracy').innerText = `${accuracy}%`;
+      
+      let mastery = "Beginner";
+      if (solved >= 40) mastery = "Scholar";
+      if (solved >= 100) mastery = "A-Grade Student";
+      if (solved >= 300) mastery = "ICT Master";
+      document.getElementById('anal-mastery').innerText = mastery;
+      
+      const categories = [
+        "Computer Architecture & Logic Gates",
+        "Number Systems & Data Representation",
+        "Operating Systems",
+        "Networking & Data Comm",
+        "Database Management",
+        "Programming (Python)",
+        "Web Development",
+        "Systems Analysis & Design",
+        "IoT & New Trends"
+      ];
+      
+      const masteryList = document.getElementById('analytics-mastery-list');
+      masteryList.innerHTML = "";
+      
+      categories.forEach(cat => {
+        let catTotal = 0;
+        let catAnswered = 0;
+        let catCorrect = 0;
+        
+        ALICT_DATA.papers.forEach(p => {
+          p.questions.forEach(q => {
+            if (q.topic === cat) {
+              catTotal++;
+              const ans = state.quizAnswers[`${p.year}-${q.number}`];
+              if (ans) {
+                catAnswered++;
+                if (ans.isCorrect) catCorrect++;
+              }
+            }
+          });
+        });
+        
+        const catAccuracy = catAnswered > 0 ? Math.round((catCorrect / catAnswered) * 100) : 0;
+        
+        const row = document.createElement('div');
+        row.className = 'analytics-topic-row';
+        row.innerHTML = `
+          <div class="analytics-topic-info">
+            <span style="color:var(--text-main);">${cat}</span>
+            <span style="color:var(--text-muted);">${catCorrect}/${catAnswered} answered (${catAccuracy}% accuracy)</span>
+          </div>
+          <div class="analytics-progress-bar-bg">
+            <div class="analytics-progress-bar-fill" style="width: ${catAccuracy}%;"></div>
+          </div>
+        `;
+        masteryList.appendChild(row);
+      });
+    }
+
+    // Lesson Notes Markdown Reader
+    function loadLessonsSidebar() {
+      const sidebar = document.getElementById('lesson-selector-sidebar');
+      // Keep the label element, rebuild items after it
+      const label = sidebar.querySelector('.lessons-sidebar-label');
+      sidebar.innerHTML = '';
+      if (label) sidebar.appendChild(label);
+
+      ALICT_DATA.units.forEach(unit => {
+        const div = document.createElement('div');
+        div.className = `lesson-selector-item ${state.activeLessonId === unit.id ? 'active' : ''}`;
+        div.innerText = unit.title;
+        div.addEventListener('click', () => selectLesson(unit.id));
+        sidebar.appendChild(div);
+      });
+
+      selectLesson(state.activeLessonId);
+    }
+
+    function selectLesson(id) {
+      state.activeLessonId = id;
+
+      // Highlight sidebar
+      const sidebarItems = document.querySelectorAll('#lesson-selector-sidebar .lesson-selector-item');
+      ALICT_DATA.units.forEach((unit, idx) => {
+        if (sidebarItems[idx]) {
+          sidebarItems[idx].classList.toggle('active', unit.id === id);
+        }
+      });
+
+      const unit = ALICT_DATA.units.find(u => u.id === id);
+      const markdownBody = document.getElementById('lesson-markdown-body');
+      const headerArea = document.getElementById('lesson-chapter-header-area');
+
+      if (!unit) return;
+
+      // Render chapter header
+      const unitIdx = ALICT_DATA.units.findIndex(u => u.id === id);
+      const wordCount = unit.content.split(/\s+/).length;
+      const readMins = Math.max(1, Math.ceil(wordCount / 220));
+      const sectionCount = (unit.content.match(/^##\s/gm) || []).length;
+
+      headerArea.innerHTML = `
+        <div class="lesson-chapter-header">
+          <div class="lesson-chapter-badge">📖 Unit ${String(unit.id).padStart(2,'0')}</div>
+          <div class="lesson-chapter-title">${unit.title.replace(/^Unit \d+:\s*/, '')}</div>
+          <div class="lesson-chapter-subtitle">
+            <span>📚 G.C.E. A/L ICT</span>
+            <span style="color:var(--border-glass);">|</span>
+            <span>New Syllabus (2019 onwards)</span>
+          </div>
+          <div class="lesson-chapter-stats">
+            <div class="lesson-stat-chip">⏱ <strong>${readMins} min</strong> read</div>
+            <div class="lesson-stat-chip">📑 <strong>${sectionCount}</strong> sections</div>
+            <div class="lesson-stat-chip">🔢 <strong>${unitIdx + 1} / ${ALICT_DATA.units.length}</strong> units</div>
+          </div>
+        </div>
+      `;
+
+      // Render content
+      markdownBody.innerHTML = customMarkdownParser(unit.content);
+
+      // Reading progress bar
+      setupReadingProgress();
+
+      // TOC
+      generateTOC();
+
+      // Unit nav footer
+      const navFooter = document.getElementById('lesson-nav-footer');
+      const prevBtn = document.getElementById('lesson-prev-btn');
+      const nextBtn = document.getElementById('lesson-next-btn');
+      const navLabel = document.getElementById('lesson-nav-label');
+      navFooter.style.display = 'flex';
+      prevBtn.disabled = unitIdx === 0;
+      nextBtn.disabled = unitIdx === ALICT_DATA.units.length - 1;
+      navLabel.innerText = `${unitIdx + 1} of ${ALICT_DATA.units.length}`;
+
+      // Scroll reading area back to top
+      const bodyCard = document.querySelector('.lesson-body-card');
+      if (bodyCard) bodyCard.scrollTop = 0;
+      document.querySelector('main').scrollTop = 0;
+    }
+
+    function navigateLesson(dir) {
+      const idx = ALICT_DATA.units.findIndex(u => u.id === state.activeLessonId);
+      const next = ALICT_DATA.units[idx + dir];
+      if (next) selectLesson(next.id);
+    }
+
+    function setupReadingProgress() {
+      const fill = document.getElementById('lesson-progress-fill');
+      const mainEl = document.querySelector('main');
+      if (!fill || !mainEl) return;
+
+      mainEl.removeEventListener('scroll', mainEl._progressHandler);
+      mainEl._progressHandler = () => {
+        const scrolled = mainEl.scrollTop;
+        const total = mainEl.scrollHeight - mainEl.clientHeight;
+        fill.style.width = total > 0 ? Math.min(100, (scrolled / total) * 100) + '%' : '0%';
+      };
+      mainEl.addEventListener('scroll', mainEl._progressHandler);
+    }
+
+    function toggleMobileTOC() {
+      const drawer = document.getElementById('lesson-toc-drawer');
+      drawer.classList.toggle('open');
+    }
+
+    // Custom Offline Markdown Parser (book-quality rendering)
+    function customMarkdownParser(md) {
+      if (!md) return "";
+
+      let html = md;
+
+      // Step 1: Extract code blocks into placeholders so their content
+      // is preserved through HTML escaping
+      const codeBlocks = [];
+      html = html.replace(/```[\w]*\n?([\s\S]*?)```/g, (_, code) => {
+        const idx = codeBlocks.length;
+        codeBlocks.push(`<pre><code>${escapeHtml(code.trim())}</code></pre>`);
+        return `\x00CODE_BLOCK_${idx}\x00`;
+      });
+
+      // Step 2: Escape ALL raw HTML tags in the source text so that
+      // lesson books with bare HTML examples (e.g. the Web Dev unit)
+      // don't inject live HTML into the page
+      html = html.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+      // Step 3: Apply markdown → HTML transformations
+      // Headers
+      html = html.replace(/^####\s+(.*)$/gm, '<h4>$1</h4>');
+      html = html.replace(/^###\s+(.*)$/gm, '<h3>$1</h3>');
+      html = html.replace(/^##\s+(.*)$/gm, '<h2>$1</h2>');
+      html = html.replace(/^#\s+(.*)$/gm, '<h1>$1</h1>');
+
+      // Bold and italic
+      html = html.replace(/\*\*\*(.*?)\*\*\*/g, '<strong><em>$1</em></strong>');
+      html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+
+      // Inline code (backtick content — escape it too)
+      html = html.replace(/`([^`]+)`/g, (_, code) =>
+        `<code>${escapeHtml(code)}</code>`);
+
+      // Tables wrapped for mobile overflow scroll
+      const tableRegex = /\|(.+)\|[\r\n]+\|[-:| ]+\|[\r\n]+((?:\|.+\|[\r\n]*)+)/g;
+      html = html.replace(tableRegex, (match, headerLine, bodyLines) => {
+        const headers = headerLine.split('|').map(h => h.trim()).filter(h => h);
+        const headerHtml = `<tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr>`;
+        const rows = bodyLines.trim().split('\n');
+        const rowsHtml = rows.map(r => {
+          const cells = r.split('|').map(c => c.trim());
+          const filtered = cells.filter((c, i) =>
+            !(i === 0 && c === '') && !(i === cells.length - 1 && c === ''));
+          return `<tr>${filtered.map(c => `<td>${c}</td>`).join('')}</tr>`;
+        }).join('');
+        return `<div class="table-wrapper"><table><thead>${headerHtml}</thead><tbody>${rowsHtml}</tbody></table></div>`;
+      });
+
+      // Ordered lists (numbered, lettered, roman numerals)
+      html = html.replace(/^\s*(\d+|[a-zA-Z]|[IVXLC]+)[\.\)]\s+(.*)$/gm,
+        '<li class="ordered-list-item" data-marker="$1">$2</li>');
+      html = html.replace(/((?:<li class="ordered-list-item"[^>]*>.*?<\/li>\s*)+)/g,
+        '<ol class="premium-ordered-list">$1</ol>');
+
+      // Unordered lists
+      html = html.replace(/^\s*[-*•]\s+(.*)$/gm, '<li>$1</li>');
+      html = html.replace(/((?:<li>.*?<\/li>\s*)+)/g, '<ul>$1</ul>');
+
+      // Paragraph split on double newlines
+      const blocks = html.split('\n\n');
+      html = blocks.map(block => {
+        block = block.trim();
+        if (!block) return '';
+        if (/^<(h[1-4]|ul|ol|div|pre|p)/.test(block)) return block;
+        if (block.startsWith('\x00CODE_BLOCK_')) return block;
+        return `<p>${block.replace(/\n/g, '<br>')}</p>`;
+      }).join('\n');
+
+      // Callout boxes
+      html = html.replace(/<p>\s*<strong>Note:?<\/strong>(.*?)<\/p>/gi,
+        '<div class="book-callout note-callout"><strong>💡 Note:</strong>$1</div>');
+      html = html.replace(/<p>\s*<strong>Advantages?:?<\/strong>(.*?)<\/p>/gi,
+        '<div class="book-callout success-callout"><strong>✔ Advantages<\/strong>$1<\/div>');
+      html = html.replace(/<p>\s*<strong>Disadvantages?:?<\/strong>(.*?)<\/p>/gi,
+        '<div class="book-callout warning-callout"><strong>⚠ Disadvantages<\/strong>$1<\/div>');
+      html = html.replace(/<p>\s*<strong>Characteristics?:?<\/strong>(.*?)<\/p>/gi,
+        '<div class="book-callout note-callout"><strong>📋 Characteristics<\/strong>$1<\/div>');
+      html = html.replace(/<p>\s*<strong>Definition:?<\/strong>(.*?)<\/p>/gi,
+        '<div class="key-term"><strong>📌 Definition:<\/strong>$1<\/div>');
+
+      // Step 4: Restore code block placeholders
+      html = html.replace(/\x00CODE_BLOCK_(\d+)\x00/g, (_, i) => codeBlocks[parseInt(i)]);
+
+      return html;
+    }
+    // Dynamic Table of Contents Generator
+    function generateTOC() {
+      const container = document.getElementById('lesson-toc-list');
+      const drawerContainer = document.getElementById('lesson-toc-drawer-list');
+      const markdownBody = document.getElementById('lesson-markdown-body');
+      container.innerHTML = "";
+      if (drawerContainer) drawerContainer.innerHTML = "";
+
+      const headers = markdownBody.querySelectorAll('h2, h3');
+
+      if (headers.length === 0) {
+        document.getElementById('lesson-toc-container').style.display = "none";
+        return;
+      } else {
+        document.getElementById('lesson-toc-container').style.display = "flex";
+      }
+
+      const mainEl = document.querySelector('main');
+
+      headers.forEach((header, index) => {
+        const headerId = `lesson-header-${index}`;
+        header.id = headerId;
+
+        const makeItem = (targetContainer) => {
+          const item = document.createElement('div');
+          item.className = `toc-item ${header.tagName.toLowerCase()}-item`;
+          item.innerText = header.innerText.replace(/^§\s*/, '');
+          item.title = header.innerText.replace(/^§\s*/, '');
+          item.dataset.headerId = headerId;
+
+          item.addEventListener('click', () => {
+            header.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            // Close mobile drawer if open
+            const drawer = document.getElementById('lesson-toc-drawer');
+            if (drawer.classList.contains('open')) drawer.classList.remove('open');
+          });
+
+          targetContainer.appendChild(item);
+        };
+
+        makeItem(container);
+        if (drawerContainer) makeItem(drawerContainer);
+      });
+
+      // Highlight active TOC item on scroll
+      if (mainEl) {
+        mainEl.removeEventListener('scroll', mainEl._tocHandler);
+        mainEl._tocHandler = () => {
+          let activeId = null;
+          headers.forEach(h => {
+            const rect = h.getBoundingClientRect();
+            if (rect.top <= 120) activeId = h.id;
+          });
+          document.querySelectorAll('.toc-item').forEach(item => {
+            item.classList.toggle('active-toc', item.dataset.headerId === activeId);
+          });
+        };
+        mainEl.addEventListener('scroll', mainEl._tocHandler);
+      }
+    }
+
+    function formatMarkdownSnippet(text) {
+      if (!text) return "";
+      let html = text;
+      html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      html = html.replace(/`(.*?)`/g, '<code-block>$1</code-block>');
+      return html;
+    }
+
+    // Switch labs tab
+    function switchLabTab(labId) {
+      document.querySelectorAll('#interactive-labs .lesson-selector-item').forEach(el => {
+        el.classList.remove('active');
+      });
+      document.getElementById(`lab-tab-${labId}`).classList.add('active');
+      
+      document.getElementById('lab-widget-gate').style.display = labId === 'gate' ? 'block' : 'none';
+      document.getElementById('lab-widget-process').style.display = labId === 'process' ? 'block' : 'none';
+      document.getElementById('lab-widget-subnet').style.display = labId === 'subnet' ? 'block' : 'none';
+    }
+
+    // ----------------------------------------------------
+    // LAB 1: LOGIC GATES WIDGET
+    // ----------------------------------------------------
+    function toggleGateInput(id) {
+      if (id === 'a') {
+        state.gateInputA = state.gateInputA === 1 ? 0 : 1;
+        document.getElementById('gate-input-a').innerText = state.gateInputA;
+        document.getElementById('gate-input-a').classList.toggle('active', state.gateInputA === 1);
+      } else {
+        state.gateInputB = state.gateInputB === 1 ? 0 : 1;
+        document.getElementById('gate-input-b').innerText = state.gateInputB;
+        document.getElementById('gate-input-b').classList.toggle('active', state.gateInputB === 1);
+      }
+      calculateGateOutput();
+    }
+
+    function calculateGateOutput() {
+      const type = document.getElementById('gate-select-type').value;
+      const a = state.gateInputA;
+      const b = state.gateInputB;
+      let q = 0;
+      
+      document.getElementById('gate-input-b-row').style.display = type === 'NOT' ? 'none' : 'flex';
+      
+      switch (type) {
+        case 'AND': q = a & b; break;
+        case 'OR': q = a | b; break;
+        case 'NOT': q = a === 1 ? 0 : 1; break;
+        case 'NAND': q = (a & b) === 1 ? 0 : 1; break;
+        case 'NOR': q = (a | b) === 1 ? 0 : 1; break;
+        case 'XOR': q = a ^ b; break;
+      }
+      
+      document.getElementById('gate-output-val').innerText = q;
+      drawGateSvg(type, a, b, q);
+    }
+
+    function drawGateSvg(type, a, b, q) {
+      const wrapper = document.getElementById('gate-svg-wrapper');
+      let svgContent = '';
+      
+      if (type === 'AND') {
+        svgContent = `
+          <svg width="200" height="100" viewBox="0 0 200 100">
+            <line x1="20" y1="30" x2="70" y2="30" stroke="var(--accent-secondary)" stroke-width="3" />
+            <line x1="20" y1="70" x2="70" y2="70" stroke="var(--accent-secondary)" stroke-width="3" />
+            <text x="10" y="35" fill="var(--text-muted)" font-weight="700">A</text>
+            <text x="10" y="75" fill="var(--text-muted)" font-weight="700">B</text>
+            <path d="M 70 20 L 100 20 A 30 30 0 0 1 100 80 L 70 80 Z" fill="none" stroke="var(--accent-primary)" stroke-width="4" />
+            <line x1="130" y1="50" x2="180" y2="50" stroke="var(--color-success)" stroke-width="3" />
+            <text x="185" y="55" fill="var(--color-success)" font-weight="700">Q</text>
+          </svg>
+        `;
+      } else if (type === 'OR') {
+        svgContent = `
+          <svg width="200" height="100" viewBox="0 0 200 100">
+            <line x1="20" y1="30" x2="68" y2="30" stroke="var(--accent-secondary)" stroke-width="3" />
+            <line x1="20" y1="70" x2="68" y2="70" stroke="var(--accent-secondary)" stroke-width="3" />
+            <text x="10" y="35" fill="var(--text-muted)" font-weight="700">A</text>
+            <text x="10" y="75" fill="var(--text-muted)" font-weight="700">B</text>
+            <path d="M 60 20 C 75 20, 85 20, 110 50 C 85 80, 75 80, 60 80 C 70 60, 70 40, 60 20 Z" fill="none" stroke="var(--accent-primary)" stroke-width="4" />
+            <line x1="110" y1="50" x2="180" y2="50" stroke="var(--color-success)" stroke-width="3" />
+            <text x="185" y="55" fill="var(--color-success)" font-weight="700">Q</text>
+          </svg>
+        `;
+      } else if (type === 'NOT') {
+        svgContent = `
+          <svg width="200" height="100" viewBox="0 0 200 100">
+            <line x1="20" y1="50" x2="70" y2="50" stroke="var(--accent-secondary)" stroke-width="3" />
+            <text x="10" y="55" fill="var(--text-muted)" font-weight="700">A</text>
+            <polygon points="70,25 110,50 70,75" fill="none" stroke="var(--accent-primary)" stroke-width="4" />
+            <circle cx="116" cy="50" r="6" fill="none" stroke="var(--accent-primary)" stroke-width="3" />
+            <line x1="122" y1="50" x2="180" y2="50" stroke="var(--color-success)" stroke-width="3" />
+            <text x="185" y="55" fill="var(--color-success)" font-weight="700">Q</text>
+          </svg>
+        `;
+      } else if (type === 'NAND') {
+        svgContent = `
+          <svg width="200" height="100" viewBox="0 0 200 100">
+            <line x1="20" y1="30" x2="70" y2="30" stroke="var(--accent-secondary)" stroke-width="3" />
+            <line x1="20" y1="70" x2="70" y2="70" stroke="var(--accent-secondary)" stroke-width="3" />
+            <text x="10" y="35" fill="var(--text-muted)" font-weight="700">A</text>
+            <text x="10" y="75" fill="var(--text-muted)" font-weight="700">B</text>
+            <path d="M 70 20 L 100 20 A 30 30 0 0 1 100 80 L 70 80 Z" fill="none" stroke="var(--accent-primary)" stroke-width="4" />
+            <circle cx="136" cy="50" r="6" fill="none" stroke="var(--accent-primary)" stroke-width="3" />
+            <line x1="142" y1="50" x2="180" y2="50" stroke="var(--color-success)" stroke-width="3" />
+            <text x="185" y="55" fill="var(--color-success)" font-weight="700">Q</text>
+          </svg>
+        `;
+      } else if (type === 'NOR') {
+        svgContent = `
+          <svg width="200" height="100" viewBox="0 0 200 100">
+            <line x1="20" y1="30" x2="68" y2="30" stroke="var(--accent-secondary)" stroke-width="3" />
+            <line x1="20" y1="70" x2="68" y2="70" stroke="var(--accent-secondary)" stroke-width="3" />
+            <text x="10" y="35" fill="var(--text-muted)" font-weight="700">A</text>
+            <text x="10" y="75" fill="var(--text-muted)" font-weight="700">B</text>
+            <path d="M 60 20 C 75 20, 85 20, 110 50 C 85 80, 75 80, 60 80 C 70 60, 70 40, 60 20 Z" fill="none" stroke="var(--accent-primary)" stroke-width="4" />
+            <circle cx="116" cy="50" r="6" fill="none" stroke="var(--accent-primary)" stroke-width="3" />
+            <line x1="122" y1="50" x2="180" y2="50" stroke="var(--color-success)" stroke-width="3" />
+            <text x="185" y="55" fill="var(--color-success)" font-weight="700">Q</text>
+          </svg>
+        `;
+      } else if (type === 'XOR') {
+        svgContent = `
+          <svg width="200" height="100" viewBox="0 0 200 100">
+            <line x1="20" y1="30" x2="63" y2="30" stroke="var(--accent-secondary)" stroke-width="3" />
+            <line x1="20" y1="70" x2="63" y2="70" stroke="var(--accent-secondary)" stroke-width="3" />
+            <text x="10" y="35" fill="var(--text-muted)" font-weight="700">A</text>
+            <text x="10" y="75" fill="var(--text-muted)" font-weight="700">B</text>
+            <path d="M 50 20 C 60 40, 60 60, 50 80" fill="none" stroke="var(--accent-primary)" stroke-width="3" />
+            <path d="M 57 20 C 72 20, 82 20, 107 50 C 82 80, 72 80, 57 80 C 67 60, 67 40, 57 20 Z" fill="none" stroke="var(--accent-primary)" stroke-width="4" />
+            <line x1="107" y1="50" x2="180" y2="50" stroke="var(--color-success)" stroke-width="3" />
+            <text x="185" y="55" fill="var(--color-success)" font-weight="700">Q</text>
+          </svg>
+        `;
+      }
+      
+      wrapper.innerHTML = svgContent;
+    }
+
+    // ----------------------------------------------------
+    // LAB 2: OS SCHEDULER WIDGET
+    // ----------------------------------------------------
+    function createProcessSim() {
+      const pid = state.pidCounter++;
+      state.processes.push({
+        pid: pid,
+        state: 'NEW',
+        pc: '0x0000',
+        cpuTime: 0
+      });
+      updateProcessTable();
+      updateProcessVisualCounts();
+      checkSimulatorButtons();
+    }
+
+    function dispatchProcessSim() {
+      const p = state.processes.find(pr => pr.state === 'READY');
+      if (p) {
+        const currentRunning = state.processes.find(pr => pr.state === 'RUNNING');
+        if (currentRunning) {
+          currentRunning.state = 'READY';
+          state.ganttHistory.push({ pid: currentRunning.pid, color: getPidColor(currentRunning.pid), state: 'Preempted' });
+        }
+        
+        p.state = 'RUNNING';
+        state.cpuRunningPid = p.pid;
+        p.pc = '0x' + Math.floor(Math.random() * 65535).toString(16).toUpperCase().padStart(4, '0');
+        p.cpuTime += Math.floor(Math.random() * 5) + 1;
+        state.ganttHistory.push({ pid: p.pid, color: getPidColor(p.pid), state: 'Running' });
+      }
+      updateProcessTable();
+      updateProcessVisualCounts();
+      checkSimulatorButtons();
+      renderGanttChart();
+    }
+
+    function interruptProcessSim() {
+      const p = state.processes.find(pr => pr.state === 'RUNNING');
+      if (p) {
+        p.state = 'READY';
+        state.ganttHistory.push({ pid: p.pid, color: getPidColor(p.pid), state: 'Timeout' });
+        state.cpuRunningPid = null;
+      }
+      updateProcessTable();
+      updateProcessVisualCounts();
+      checkSimulatorButtons();
+      renderGanttChart();
+    }
+
+    function blockProcessSim() {
+      const p = state.processes.find(pr => pr.state === 'RUNNING');
+      if (p) {
+        p.state = 'WAITING';
+        state.ganttHistory.push({ pid: p.pid, color: getPidColor(p.pid), state: 'I/O Wait' });
+        state.cpuRunningPid = null;
+      }
+      updateProcessTable();
+      updateProcessVisualCounts();
+      checkSimulatorButtons();
+      renderGanttChart();
+    }
+
+    function unblockProcessSim() {
+      const p = state.processes.find(pr => pr.state === 'WAITING');
+      if (p) {
+        p.state = 'READY';
+      }
+      updateProcessTable();
+      updateProcessVisualCounts();
+      checkSimulatorButtons();
+    }
+
+    function exitProcessSim() {
+      const idx = state.processes.findIndex(pr => pr.state === 'RUNNING');
+      if (idx !== -1) {
+        const p = state.processes[idx];
+        p.state = 'TERMINATED';
+        state.ganttHistory.push({ pid: p.pid, color: '#374151', state: 'Terminated' });
+        state.cpuRunningPid = null;
+      }
+      updateProcessTable();
+      updateProcessVisualCounts();
+      checkSimulatorButtons();
+      renderGanttChart();
+    }
+
+    function getPidColor(pid) {
+      const colors = ['#c5a059', '#dfb974', '#f3e5ab', '#e5c158', '#d4af37', '#ffffff'];
+      return colors[pid % colors.length];
+    }
+
+    function updateProcessTable() {
+      const body = document.getElementById('sim-pcb-table-body');
+      body.innerHTML = "";
+      
+      const active = state.processes.filter(p => p.state !== 'TERMINATED');
+      if (active.length === 0) {
+        body.innerHTML = `<tr><td colspan="4" style="padding:1rem; text-align:center; color:var(--text-muted);">No active processes. Click "Create New Process" to add one.</td></tr>`;
+        return;
+      }
+      
+      active.forEach(p => {
+        const tr = document.createElement('tr');
+        tr.style.borderBottom = '1px solid rgba(255,255,255,0.05)';
+        tr.innerHTML = `
+          <td style="padding:0.6rem 1rem; font-weight:700; color:${getPidColor(p.pid)};">P${p.pid}</td>
+          <td style="padding:0.6rem 1rem;"><span class="quiz-badge" style="font-size:0.75rem; background:rgba(255,255,255,0.04); color:var(--text-main);">${p.state}</span></td>
+          <td style="padding:0.6rem 1rem; font-family:'JetBrains Mono';">${p.pc}</td>
+          <td style="padding:0.6rem 1rem;">${p.cpuTime} units</td>
+        `;
+        body.appendChild(tr);
+      });
+    }
+
+    function updateProcessVisualCounts() {
+      const counts = { NEW: 0, READY: 0, RUNNING: 0, TERMINATED: 0, WAITING: 0 };
+      state.processes.forEach(p => {
+        counts[p.state] = (counts[p.state] || 0) + 1;
+      });
+      
+      const newProcessIndex = state.processes.findIndex(pr => pr.state === 'NEW');
+      if (newProcessIndex !== -1) {
+        setTimeout(() => {
+          state.processes[newProcessIndex].state = 'READY';
+          updateProcessTable();
+          updateProcessVisualCounts();
+          checkSimulatorButtons();
+        }, 1200);
+      }
+      
+      document.getElementById('pcount-NEW').innerText = `${counts.NEW} P`;
+      document.getElementById('pcount-READY').innerText = `${counts.READY} P`;
+      document.getElementById('pcount-RUNNING').innerText = `${counts.RUNNING} P`;
+      document.getElementById('pcount-TERMINATED').innerText = `${counts.TERMINATED} P`;
+      
+      document.querySelectorAll('.state-node').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.state-connector').forEach(el => el.classList.remove('active'));
+      
+      if (counts.NEW > 0) document.getElementById('node-NEW').classList.add('active');
+      if (counts.READY > 0) {
+        document.getElementById('node-READY').classList.add('active');
+        document.getElementById('conn-1').classList.add('active');
+      }
+      if (counts.RUNNING > 0) {
+        document.getElementById('node-RUNNING').classList.add('active');
+        document.getElementById('conn-2').classList.add('active');
+      }
+      if (counts.TERMINATED > 0) {
+        document.getElementById('node-TERMINATED').classList.add('active');
+        document.getElementById('conn-3').classList.add('active');
+      }
+    }
+
+    function checkSimulatorButtons() {
+      const hasReady = state.processes.some(p => p.state === 'READY');
+      const hasRunning = state.processes.some(p => p.state === 'RUNNING');
+      const hasWaiting = state.processes.some(p => p.state === 'WAITING');
+      
+      document.getElementById('btn-dispatch-sim').disabled = !hasReady;
+      document.getElementById('btn-interrupt-sim').disabled = !hasRunning;
+      document.getElementById('btn-block-sim').disabled = !hasRunning;
+      document.getElementById('btn-unblock-sim').disabled = !hasWaiting;
+      document.getElementById('btn-exit-sim').disabled = !hasRunning;
+    }
+
+    function renderGanttChart() {
+      const wrapper = document.getElementById('gantt-bar-wrapper');
+      wrapper.innerHTML = "";
+      
+      if (state.ganttHistory.length === 0) {
+        wrapper.innerHTML = `<div style="padding:0.5rem; text-align:center; color:var(--text-muted); font-size:0.8rem; width:100%;">No CPU execution history yet.</div>`;
+        return;
+      }
+      
+      const slices = state.ganttHistory.slice(-10);
+      slices.forEach(slice => {
+        const div = document.createElement('div');
+        div.className = 'gantt-slice';
+        div.style.backgroundColor = slice.color;
+        div.style.flexGrow = 1;
+        div.innerHTML = `P${slice.pid}`;
+        div.title = `State transition: ${slice.state}`;
+        wrapper.appendChild(div);
+      });
+    }
+
+    // ----------------------------------------------------
+    // LAB 3: IP NETWORK SUBNETTING WIDGET
+    // ----------------------------------------------------
+    function calculateSubnet() {
+      const ip = document.getElementById('subnet-ip-input').value.trim();
+      const prefix = parseInt(document.getElementById('subnet-prefix-select').value);
+      
+      const parts = ip.split('.');
+      if (parts.length !== 4 || parts.some(p => isNaN(p) || p === "" || parseInt(p) < 0 || parseInt(p) > 255)) {
+        return;
+      }
+      
+      const ipOctets = parts.map(Number);
+      const ipInt = (ipOctets[0] << 24) >>> 0 | (ipOctets[1] << 16) | (ipOctets[2] << 8) | ipOctets[3];
+      const maskInt = (0xffffffff << (32 - prefix)) >>> 0;
+      const netInt = (ipInt & maskInt) >>> 0;
+      const broadInt = (netInt | ~maskInt) >>> 0;
+      
+      const netOctets = [
+        (netInt >>> 24) & 255,
+        (netInt >>> 16) & 255,
+        (netInt >>> 8) & 255,
+        netInt & 255
+      ];
+      
+      const broadOctets = [
+        (broadInt >>> 24) & 255,
+        (broadInt >>> 16) & 255,
+        (broadInt >>> 8) & 255,
+        broadInt & 255
+      ];
+      
+      const maskOctets = [
+        (maskInt >>> 24) & 255,
+        (maskInt >>> 16) & 255,
+        (maskInt >>> 8) & 255,
+        maskInt & 255
+      ];
+      
+      const firstUsable = [...netOctets];
+      firstUsable[3] += 1;
+      
+      const lastUsable = [...broadOctets];
+      lastUsable[3] -= 1;
+      
+      const hosts = Math.max(0, Math.pow(2, 32 - prefix) - 2);
+      
+      document.getElementById('sub-network-val').innerText = netOctets.join('.');
+      document.getElementById('sub-broadcast-val').innerText = broadOctets.join('.');
+      document.getElementById('sub-range-val').innerText = firstUsable.join('.') + ' - ' + lastUsable.join('.');
+      document.getElementById('sub-hosts-val').innerText = hosts;
+      
+      const ipBinStr = ipOctets.map(o => o.toString(2).padStart(8, '0')).join('.');
+      const maskBinStr = maskOctets.map(o => o.toString(2).padStart(8, '0')).join('.');
+      
+      document.getElementById('bin-ip-val').innerText = ipBinStr;
+      document.getElementById('bin-mask-val').innerText = maskBinStr;
+      
+      let dotOffset = 0;
+      let splitIdx = prefix;
+      if (prefix > 8) dotOffset = 1;
+      if (prefix > 16) dotOffset = 2;
+      if (prefix > 24) dotOffset = 3;
+      
+      const totalPrefixLength = prefix + dotOffset;
+      const fullBinStr = ipBinStr;
+      const netPart = fullBinStr.substring(0, totalPrefixLength);
+      const hostPart = fullBinStr.substring(totalPrefixLength);
+      
+      document.getElementById('bin-split-val').innerHTML = `
+        <span class="binary-split-net" title="Network Bits">${netPart}</span><span style="color:var(--text-bright); font-weight:bold;">|</span><span class="binary-split-host" title="Host Bits">${hostPart}</span>
+      `;
+    }
+
+    function escapeHtml(unsafe) {
+      if (!unsafe) return "";
+      return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+  </script>
+</body>
+</html>

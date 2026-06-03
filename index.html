@@ -961,8 +961,31 @@
     /* Lesson Notes Layout */
     .lessons-layout {
       display: grid;
-      grid-template-columns: 200px 1fr 190px;
+      grid-template-columns: 210px 1fr;
       gap: 1.4rem;
+      align-items: start;
+    }
+
+    /* Left panel: Units + TOC stacked vertically */
+    .lesson-left-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: sticky;
+      top: 1.5rem;
+      max-height: calc(100vh - 3rem);
+      overflow-y: auto;
+      scrollbar-width: none;
+    }
+    .lesson-left-panel::-webkit-scrollbar { display: none; }
+
+    /* TOC inside left panel */
+    #lesson-notes .lesson-toc-card {
+      position: static;
+      max-height: none;
+    }
+    #lesson-notes .toc-list {
+      max-height: 35vh;
     }
 
     .lessons-sidebar {
@@ -971,8 +994,7 @@
       border-radius: 16px;
       padding: 1rem;
       height: max-content;
-      position: sticky;
-      top: 1.5rem;
+      position: static;
       display: flex;
       flex-direction: column;
       gap: 0.4rem;
@@ -2562,7 +2584,7 @@
 
     @media (max-width: 1280px) {
       .lessons-layout {
-        grid-template-columns: 185px 1fr 170px;
+        grid-template-columns: 195px 1fr;
         gap: 1.2rem;
       }
       .lesson-reading-area { padding: 2rem 2.2rem 2.5rem; }
@@ -2582,12 +2604,10 @@
       .analytics-summary-cards { grid-template-columns: repeat(3, 1fr); }
     }
 
-    @media (max-width: 1100px) {
-      .lessons-layout {
-        grid-template-columns: 200px 1fr;
-      }
-      .lesson-toc-card { display: none !important; }
+    @media (max-width: 700px) {
+      /* On mobile the left panel collapses — show floating TOC button */
       .lesson-toc-mobile-btn { display: flex !important; }
+      #lesson-notes .lesson-toc-card { display: none !important; }
     }
 
     @media (max-width: 1023px) {
@@ -2736,17 +2756,24 @@
       .study-card-title { font-size: 1rem; }
       .study-option { font-size: 0.85rem; padding: 0.7rem 0.9rem; }
 
-      /* Lessons layout - full single column */
+      /* Lessons layout - single column on mobile */
       .lessons-layout {
         grid-template-columns: 1fr;
         gap: 0.8rem;
       }
 
-      .lesson-toc-card { display: none !important; }
+      /* Left panel becomes a horizontal scrollable tab row */
+      .lesson-left-panel {
+        position: static;
+        max-height: none;
+        overflow: visible;
+        gap: 0.5rem;
+      }
+
+      #lesson-notes .lesson-toc-card { display: none !important; }
       .lesson-toc-mobile-btn { display: flex !important; }
 
       .lessons-sidebar {
-        position: static;
         flex-direction: row !important;
         overflow-x: auto;
         white-space: nowrap;
@@ -3339,11 +3366,20 @@
         </div>
 
         <div class="lessons-layout">
-          <!-- Unit Selector Sidebar (wrapped for mobile fade hint) -->
-          <div class="lessons-sidebar-wrap lesson-tab-wrap">
-            <div class="lessons-sidebar" id="lesson-selector-sidebar">
-              <div class="lessons-sidebar-label">📚 Units</div>
-              <!-- Sidebar selectors will populate here -->
+          <!-- Left Panel: Units + TOC stacked -->
+          <div class="lesson-left-panel">
+            <div class="lessons-sidebar-wrap lesson-tab-wrap">
+              <div class="lessons-sidebar" id="lesson-selector-sidebar">
+                <div class="lessons-sidebar-label">📚 Units</div>
+                <!-- Sidebar selectors will populate here -->
+              </div>
+            </div>
+            <!-- TOC Card (desktop, inside left panel) -->
+            <div class="lesson-toc-card" id="lesson-toc-container" style="display: none;">
+              <div class="toc-title">On This Page</div>
+              <div id="lesson-toc-list" class="toc-list">
+                <!-- TOC links populate here -->
+              </div>
             </div>
           </div>
 
@@ -3362,14 +3398,6 @@
               <button class="lesson-nav-btn" id="lesson-prev-btn" onclick="navigateLesson(-1)">← Previous Unit</button>
               <span id="lesson-nav-label" style="font-size:0.8rem; color:var(--text-muted);"></span>
               <button class="lesson-nav-btn" id="lesson-next-btn" onclick="navigateLesson(1)">Next Unit →</button>
-            </div>
-          </div>
-
-          <!-- TOC Sidebar (hidden on small screens) -->
-          <div class="lesson-toc-card" id="lesson-toc-container" style="display: none;">
-            <div class="toc-title">On This Page</div>
-            <div id="lesson-toc-list" class="toc-list">
-              <!-- TOC links populate here -->
             </div>
           </div>
         </div>

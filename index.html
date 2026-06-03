@@ -2097,6 +2097,272 @@
       box-shadow: 0 2px 12px var(--accent-glow);
     }
     
+    /* ── Number System Converter ── */
+    .numconv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .numconv-output-card {
+      background: rgba(15,19,25,0.5);
+      border: 1px solid var(--border-glass);
+      border-radius: 14px;
+      padding: 1.2rem 1.4rem;
+    }
+    .numconv-base-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+    .numconv-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent-secondary);
+      word-break: break-all;
+    }
+    .numconv-value.highlight {
+      color: var(--color-success);
+      font-size: 1.5rem;
+    }
+    .twos-steps {
+      background: rgba(15,19,25,0.5);
+      border: 1px solid var(--border-glass);
+      border-left: 4px solid var(--accent-primary);
+      border-radius: 0 10px 10px 0;
+      padding: 1rem 1.2rem;
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .twos-step {
+      font-size: 0.88rem;
+      color: var(--text-main);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .twos-step.step-result {
+      color: var(--color-success);
+      font-weight: 700;
+      border-top: 1px solid var(--border-glass);
+      padding-top: 0.5rem;
+      margin-top: 0.2rem;
+    }
+
+    /* ── Truth Table Generator ── */
+    .truth-table-wrap {
+      overflow-x: auto;
+      margin-top: 1.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border-glass);
+    }
+    .truth-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 300px;
+    }
+    .truth-table th {
+      background: rgba(197,160,89,0.08);
+      color: var(--accent-primary-hover);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 0.7rem 1.1rem;
+      text-align: center;
+      border-bottom: 2px solid rgba(197,160,89,0.2);
+    }
+    .truth-table td {
+      padding: 0.6rem 1.1rem;
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .truth-table tr:last-child td { border-bottom: none; }
+    .truth-table td.val-1 { color: var(--color-success); font-weight: 700; }
+    .truth-table td.val-0 { color: rgba(239,68,68,0.8); }
+    .truth-table td.output-col { background: rgba(197,160,89,0.05); font-weight: 700; }
+    .truth-input-row {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-end;
+      flex-wrap: wrap;
+    }
+
+    /* ── CPU Scheduling ── */
+    .sched-process-form {
+      background: rgba(15,19,25,0.5);
+      border: 1px solid var(--border-glass);
+      border-radius: 14px;
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 1.5rem;
+    }
+    .sched-form-row {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      margin-bottom: 1rem;
+    }
+    .sched-process-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border-glass);
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+    .sched-process-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 500px;
+    }
+    .sched-process-table th {
+      background: rgba(197,160,89,0.06);
+      color: var(--accent-primary);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 0.6rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-glass);
+    }
+    .sched-process-table td {
+      padding: 0.55rem 1rem;
+      font-size: 0.88rem;
+      color: var(--text-main);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .sched-process-table tr:last-child td { border-bottom: none; }
+    .sched-gantt-wrap {
+      background: rgba(15,19,25,0.5);
+      border: 1px solid var(--border-glass);
+      border-radius: 12px;
+      padding: 1.2rem;
+      margin-top: 1.5rem;
+      overflow-x: auto;
+    }
+    .sched-gantt-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin-bottom: 0.8rem;
+    }
+    .sched-gantt-bar {
+      display: flex;
+      height: 40px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      min-width: 400px;
+    }
+    .sched-gantt-slice {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #fff;
+      min-width: 30px;
+      transition: var(--transition-smooth);
+      position: relative;
+    }
+    .sched-gantt-slice:hover { filter: brightness(1.2); }
+    .sched-gantt-time {
+      display: flex;
+      min-width: 400px;
+      margin-top: 0.3rem;
+    }
+    .sched-gantt-tick {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .sched-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 1.2rem;
+    }
+    .sched-stat-card {
+      background: rgba(15,19,25,0.5);
+      border: 1px solid var(--border-glass);
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+    }
+    .sched-stat-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.3rem;
+    }
+    .sched-stat-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--accent-secondary);
+    }
+
+    /* ── HTML/CSS Live Editor ── */
+    .editor-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .editor-pane {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .editor-pane-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .code-editor {
+      width: 100%;
+      min-height: 180px;
+      background: rgba(8,11,16,0.9);
+      border: 1px solid var(--border-glass);
+      border-radius: 10px;
+      color: var(--accent-secondary);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      padding: 1rem;
+      resize: vertical;
+      outline: none;
+      line-height: 1.6;
+      tab-size: 2;
+    }
+    .code-editor:focus { border-color: var(--accent-primary); }
+    .html-preview-frame {
+      width: 100%;
+      height: 280px;
+      border: 1px solid var(--border-glass);
+      border-radius: 10px;
+      background: #ffffff;
+    }
+    .editor-toolbar {
+      display: flex;
+      gap: 0.6rem;
+      align-items: center;
+      margin-bottom: 0.5rem;
+      flex-wrap: wrap;
+    }
+
     /* ── Back to Top button ── */
     .back-to-top {
       position: fixed;
@@ -2635,6 +2901,10 @@
 
       .lesson-chapter-title { font-size: 1.25rem; }
       .lesson-chapter-stats { gap: 0.6rem; }
+      .numconv-grid { grid-template-columns: 1fr; }
+      .editor-layout { grid-template-columns: 1fr; }
+      .sched-stats-grid { grid-template-columns: 1fr 1fr; }
+      .results-modal { padding: 1.5rem 1.2rem; }
     }
   </style>
 </head>
@@ -2978,9 +3248,13 @@
         
         <div class="labs-grid">
           <div class="lessons-sidebar">
-            <div class="lesson-selector-item active" id="lab-tab-gate" onclick="switchLabTab('gate')">Logic Gate Playground</div>
-            <div class="lesson-selector-item" id="lab-tab-process" onclick="switchLabTab('process')">OS Process Scheduler</div>
-            <div class="lesson-selector-item" id="lab-tab-subnet" onclick="switchLabTab('subnet')">IP Subnet Calculator</div>
+            <div class="lesson-selector-item active" id="lab-tab-gate"    onclick="switchLabTab('gate')">⚡ Logic Gate</div>
+            <div class="lesson-selector-item" id="lab-tab-numconv"        onclick="switchLabTab('numconv')">🔢 Number Systems</div>
+            <div class="lesson-selector-item" id="lab-tab-truth"          onclick="switchLabTab('truth')">📋 Truth Table</div>
+            <div class="lesson-selector-item" id="lab-tab-sched"          onclick="switchLabTab('sched')">🖥️ CPU Scheduling</div>
+            <div class="lesson-selector-item" id="lab-tab-process"        onclick="switchLabTab('process')">⚙️ Process States</div>
+            <div class="lesson-selector-item" id="lab-tab-subnet"         onclick="switchLabTab('subnet')">🌐 IP Subnetting</div>
+            <div class="lesson-selector-item" id="lab-tab-htmlcss"        onclick="switchLabTab('htmlcss')">🌍 HTML/CSS Editor</div>
           </div>
           
           <div class="lab-content-area">
@@ -3027,6 +3301,13 @@
                       <span style="font-weight:700; color:var(--text-muted);">Output Q = </span>
                       <span id="gate-output-val" class="gate-output-val">0</span>
                     </div>
+                  </div>
+                </div>
+                <!-- Truth Table for selected gate -->
+                <div style="margin-top:1.5rem;">
+                  <div style="font-size:0.78rem;font-weight:700;color:var(--accent-secondary);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:0.6rem;">Truth Table</div>
+                  <div class="truth-table-wrap" style="margin-top:0;">
+                    <table class="truth-table" id="gate-truth-table"></table>
                   </div>
                 </div>
               </div>
@@ -3134,15 +3415,17 @@
                   </div>
                   
                   <div class="filter-group">
-                    <span class="filter-label">CIDR Prefix (e.g. /27)</span>
+                    <span class="filter-label">CIDR Prefix</span>
                     <select id="subnet-prefix-select" class="select-premium" onchange="calculateSubnet()">
-                      <option value="24">/24 (255.255.255.0)</option>
-                      <option value="25">/25 (255.255.255.128)</option>
-                      <option value="26">/26 (255.255.255.192)</option>
-                      <option value="27" selected>/27 (255.255.255.224)</option>
-                      <option value="28">/28 (255.255.255.240)</option>
-                      <option value="29">/29 (255.255.255.248)</option>
-                      <option value="30">/30 (255.255.255.252)</option>
+                      <option value="8">/8   (255.0.0.0)</option>
+                      <option value="16">/16  (255.255.0.0)</option>
+                      <option value="24">/24  (255.255.255.0)</option>
+                      <option value="25">/25  (255.255.255.128)</option>
+                      <option value="26">/26  (255.255.255.192)</option>
+                      <option value="27" selected>/27  (255.255.255.224)</option>
+                      <option value="28">/28  (255.255.255.240)</option>
+                      <option value="29">/29  (255.255.255.248)</option>
+                      <option value="30">/30  (255.255.255.252)</option>
                     </select>
                   </div>
                 </div>
@@ -3186,7 +3469,218 @@
                 </div>
               </div>
             </div>
-            
+
+            <!-- ══ NUMBER SYSTEM CONVERTER + 2's COMPLEMENT ══ -->
+            <div id="lab-widget-numconv" class="lab-widget-card" style="display:none;">
+              <h3 style="margin-bottom:0.5rem;color:var(--text-bright);">🔢 Number System Converter</h3>
+              <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1.5rem;">Convert between Binary, Octal, Decimal and Hexadecimal. Calculate 2&apos;s complement step by step.</p>
+
+              <div style="background:rgba(15,19,25,0.5);border:1px solid var(--border-glass);border-radius:14px;padding:1.4rem;margin-bottom:1.5rem;">
+                <div style="font-size:0.78rem;font-weight:700;color:var(--accent-secondary);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:1rem;">Number Converter</div>
+                <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-end;margin-bottom:1.2rem;">
+                  <div class="filter-group" style="flex:1;min-width:140px;">
+                    <span class="filter-label">Enter Value</span>
+                    <input type="text" id="num-input" class="input-premium" placeholder="e.g. 42" oninput="convertNumber()" style="min-width:unset;">
+                  </div>
+                  <div class="filter-group">
+                    <span class="filter-label">From Base</span>
+                    <select id="num-from-base" class="select-premium" onchange="convertNumber()">
+                      <option value="10">Decimal (Base 10)</option>
+                      <option value="2">Binary (Base 2)</option>
+                      <option value="8">Octal (Base 8)</option>
+                      <option value="16">Hexadecimal (Base 16)</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="numconv-grid">
+                  <div class="numconv-output-card">
+                    <div class="numconv-base-label">Binary (Base 2)</div>
+                    <div class="numconv-value" id="num-binary">—</div>
+                  </div>
+                  <div class="numconv-output-card">
+                    <div class="numconv-base-label">Octal (Base 8)</div>
+                    <div class="numconv-value" id="num-octal">—</div>
+                  </div>
+                  <div class="numconv-output-card">
+                    <div class="numconv-base-label">Decimal (Base 10)</div>
+                    <div class="numconv-value highlight" id="num-decimal">—</div>
+                  </div>
+                  <div class="numconv-output-card">
+                    <div class="numconv-base-label">Hexadecimal (Base 16)</div>
+                    <div class="numconv-value" id="num-hex">—</div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="background:rgba(15,19,25,0.5);border:1px solid var(--border-glass);border-radius:14px;padding:1.4rem;">
+                <div style="font-size:0.78rem;font-weight:700;color:var(--accent-secondary);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:1rem;">2&apos;s Complement Calculator</div>
+                <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-end;margin-bottom:0.8rem;">
+                  <div class="filter-group" style="flex:1;min-width:120px;">
+                    <span class="filter-label">Decimal Number</span>
+                    <input type="number" id="twos-input" class="input-premium" placeholder="e.g. -25" oninput="calcTwosComplement()" style="min-width:unset;">
+                  </div>
+                  <div class="filter-group">
+                    <span class="filter-label">Bit Width</span>
+                    <select id="twos-bits" class="select-premium" onchange="calcTwosComplement()">
+                      <option value="8">8-bit</option>
+                      <option value="16">16-bit</option>
+                    </select>
+                  </div>
+                  <div style="padding-bottom:0.1rem;">
+                    <div class="numconv-base-label">Result</div>
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:1rem;font-weight:700;color:var(--color-success);min-height:24px;" id="twos-result">—</div>
+                  </div>
+                </div>
+                <div class="twos-steps" id="twos-steps" style="display:none;"></div>
+              </div>
+            </div>
+
+            <!-- ══ TRUTH TABLE GENERATOR ══ -->
+            <div id="lab-widget-truth" class="lab-widget-card" style="display:none;">
+              <h3 style="margin-bottom:0.5rem;color:var(--text-bright);">📋 Truth Table Generator</h3>
+              <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1.5rem;">Enter a Boolean expression using variables A–D and operators AND, OR, NOT, NAND, NOR, XOR. Example: <code style="color:var(--accent-secondary);">NOT A AND B OR C</code></p>
+
+              <div style="background:rgba(15,19,25,0.5);border:1px solid var(--border-glass);border-radius:14px;padding:1.4rem;margin-bottom:1.2rem;">
+                <div class="truth-input-row">
+                  <div class="filter-group" style="flex:1;min-width:260px;">
+                    <span class="filter-label">Boolean Expression</span>
+                    <input type="text" id="truth-expr" class="input-premium" placeholder="e.g. (A AND B) OR NOT C" style="min-width:unset;">
+                  </div>
+                  <button class="btn-premium" onclick="generateTruthTable()" style="margin-bottom:0.1rem;">Generate Table</button>
+                </div>
+                <div style="margin-top:0.8rem;display:flex;gap:0.5rem;flex-wrap:wrap;">
+                  <span style="font-size:0.72rem;color:var(--text-muted);">Quick examples:</span>
+                  <button onclick="setExpr('A AND B')" style="font-size:0.72rem;background:rgba(255,255,255,0.04);border:1px solid var(--border-glass);color:var(--text-muted);padding:0.2rem 0.6rem;border-radius:6px;cursor:pointer;">A AND B</button>
+                  <button onclick="setExpr('NOT A OR B')" style="font-size:0.72rem;background:rgba(255,255,255,0.04);border:1px solid var(--border-glass);color:var(--text-muted);padding:0.2rem 0.6rem;border-radius:6px;cursor:pointer;">NOT A OR B</button>
+                  <button onclick="setExpr('(A AND B) OR (NOT A AND C)')" style="font-size:0.72rem;background:rgba(255,255,255,0.04);border:1px solid var(--border-glass);color:var(--text-muted);padding:0.2rem 0.6rem;border-radius:6px;cursor:pointer;">(A AND B) OR (NOT A AND C)</button>
+                  <button onclick="setExpr('A XOR B')" style="font-size:0.72rem;background:rgba(255,255,255,0.04);border:1px solid var(--border-glass);color:var(--text-muted);padding:0.2rem 0.6rem;border-radius:6px;cursor:pointer;">A XOR B</button>
+                  <button onclick="setExpr('NOT (A AND B)')" style="font-size:0.72rem;background:rgba(255,255,255,0.04);border:1px solid var(--border-glass);color:var(--text-muted);padding:0.2rem 0.6rem;border-radius:6px;cursor:pointer;">NOT (A AND B) = NAND</button>
+                </div>
+              </div>
+
+              <div id="truth-error" style="display:none;color:var(--color-error);font-size:0.85rem;padding:0.6rem 1rem;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:8px;margin-bottom:1rem;"></div>
+              <div id="truth-table-container"></div>
+            </div>
+
+            <!-- ══ CPU SCHEDULING ALGORITHMS ══ -->
+            <div id="lab-widget-sched" class="lab-widget-card" style="display:none;">
+              <h3 style="margin-bottom:0.5rem;color:var(--text-bright);">🖥️ CPU Scheduling Algorithms</h3>
+              <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1.5rem;">Simulate FCFS, SJF (non-preemptive) and Round Robin scheduling. See Gantt chart, waiting time and turnaround time.</p>
+
+              <div class="sched-process-form">
+                <div style="font-size:0.78rem;font-weight:700;color:var(--accent-secondary);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:0.8rem;">Add Process</div>
+                <div class="sched-form-row">
+                  <div class="filter-group">
+                    <span class="filter-label">Arrival Time</span>
+                    <input type="number" id="sched-arrival" class="select-premium" value="0" min="0" style="width:90px;">
+                  </div>
+                  <div class="filter-group">
+                    <span class="filter-label">Burst Time</span>
+                    <input type="number" id="sched-burst" class="select-premium" value="4" min="1" style="width:90px;">
+                  </div>
+                  <div class="filter-group">
+                    <span class="filter-label">Priority</span>
+                    <input type="number" id="sched-priority" class="select-premium" value="1" min="1" style="width:90px;">
+                  </div>
+                  <button class="btn-premium" onclick="schedAddProcess()">+ Add Process</button>
+                  <button class="btn-premium btn-outline" onclick="schedLoadSample()">Load Sample</button>
+                </div>
+                <div class="sched-process-table-wrap" id="sched-process-table-wrap" style="display:none;">
+                  <table class="sched-process-table">
+                    <thead><tr><th>Process</th><th>Arrival</th><th>Burst</th><th>Priority</th><th></th></tr></thead>
+                    <tbody id="sched-process-body"></tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-end;margin-bottom:1.2rem;">
+                <div class="filter-group">
+                  <span class="filter-label">Algorithm</span>
+                  <select id="sched-algo" class="select-premium" onchange="schedToggleQuantum()">
+                    <option value="fcfs">FCFS — First Come First Served</option>
+                    <option value="sjf">SJF — Shortest Job First</option>
+                    <option value="rr">Round Robin</option>
+                  </select>
+                </div>
+                <div class="filter-group" id="sched-quantum-group" style="display:none;">
+                  <span class="filter-label">Time Quantum</span>
+                  <input type="number" id="sched-quantum" class="select-premium" value="2" min="1" style="width:90px;">
+                </div>
+                <button class="btn-premium" onclick="runScheduling()">▶ Run Simulation</button>
+                <button class="btn-premium btn-outline" onclick="schedClearAll()">✕ Clear All</button>
+              </div>
+
+              <div id="sched-results" style="display:none;">
+                <div class="sched-gantt-wrap">
+                  <div class="sched-gantt-title">CPU Gantt Chart</div>
+                  <div class="sched-gantt-bar" id="sched-gantt-bar"></div>
+                  <div class="sched-gantt-time" id="sched-gantt-time"></div>
+                </div>
+                <div style="margin-top:1.5rem;">
+                  <div class="sched-process-table-wrap">
+                    <table class="sched-process-table">
+                      <thead><tr><th>Process</th><th>Arrival</th><th>Burst</th><th>Completion</th><th>Turnaround</th><th>Waiting</th></tr></thead>
+                      <tbody id="sched-results-body"></tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="sched-stats-grid">
+                  <div class="sched-stat-card">
+                    <div class="sched-stat-label">Avg Waiting Time</div>
+                    <div class="sched-stat-value" id="sched-avg-wt">—</div>
+                  </div>
+                  <div class="sched-stat-card">
+                    <div class="sched-stat-label">Avg Turnaround Time</div>
+                    <div class="sched-stat-value" id="sched-avg-tat">—</div>
+                  </div>
+                  <div class="sched-stat-card">
+                    <div class="sched-stat-label">CPU Utilisation</div>
+                    <div class="sched-stat-value" id="sched-cpu-util">—</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ══ HTML/CSS LIVE EDITOR ══ -->
+            <div id="lab-widget-htmlcss" class="lab-widget-card" style="display:none;">
+              <h3 style="margin-bottom:0.5rem;color:var(--text-bright);">🌍 HTML / CSS Live Editor</h3>
+              <p style="color:var(--text-muted);font-size:0.9rem;margin-bottom:1rem;">Write HTML and CSS and see the result instantly in the preview panel below.</p>
+
+              <div class="editor-toolbar">
+                <button class="btn-premium" onclick="runHTMLPreview()">▶ Run</button>
+                <button class="btn-premium btn-outline" onclick="loadHTMLSample('basic')">Sample: Basic Page</button>
+                <button class="btn-premium btn-outline" onclick="loadHTMLSample('table')">Sample: HTML Table</button>
+                <button class="btn-premium btn-outline" onclick="loadHTMLSample('form')">Sample: HTML Form</button>
+                <button class="btn-premium btn-outline" onclick="clearHTMLEditor()">✕ Clear</button>
+              </div>
+
+              <div class="editor-layout">
+                <div class="editor-pane">
+                  <div class="editor-pane-label">🟧 HTML</div>
+                  <textarea class="code-editor" id="html-editor" placeholder="Write your HTML here..." oninput="liveHTMLUpdate()" spellcheck="false">&lt;h1&gt;Hello, World!&lt;/h1&gt;
+&lt;p&gt;This is a &lt;strong&gt;paragraph&lt;/strong&gt;.&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Item 1&lt;/li&gt;
+  &lt;li&gt;Item 2&lt;/li&gt;
+&lt;/ul&gt;</textarea>
+                </div>
+                <div class="editor-pane">
+                  <div class="editor-pane-label">🟦 CSS</div>
+                  <textarea class="code-editor" id="css-editor" placeholder="Write your CSS here..." oninput="liveHTMLUpdate()" spellcheck="false">body {
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background: #f5f5f5;
+}
+h1 { color: #2c3e50; }
+p { color: #555; }
+li { margin: 4px 0; }</textarea>
+                </div>
+              </div>
+
+              <div style="font-size:0.72rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:0.4rem;">Preview</div>
+              <iframe id="html-preview" class="html-preview-frame" sandbox="allow-scripts" title="HTML Preview"></iframe>
+            </div>
+
           </div>
         </div>
       </section>
@@ -3884,14 +4378,15 @@
 
     // Switch labs tab
     function switchLabTab(labId) {
-      document.querySelectorAll('#interactive-labs .lesson-selector-item').forEach(el => {
-        el.classList.remove('active');
-      });
+      document.querySelectorAll('#interactive-labs .lesson-selector-item').forEach(el => el.classList.remove('active'));
       document.getElementById(`lab-tab-${labId}`).classList.add('active');
-      
-      document.getElementById('lab-widget-gate').style.display = labId === 'gate' ? 'block' : 'none';
-      document.getElementById('lab-widget-process').style.display = labId === 'process' ? 'block' : 'none';
-      document.getElementById('lab-widget-subnet').style.display = labId === 'subnet' ? 'block' : 'none';
+      const allWidgets = ['gate','numconv','truth','sched','process','subnet','htmlcss'];
+      allWidgets.forEach(id => {
+        const el = document.getElementById(`lab-widget-${id}`);
+        if (el) el.style.display = (id === labId) ? 'block' : 'none';
+      });
+      // Run live preview when switching to HTML/CSS editor
+      if (labId === 'htmlcss') setTimeout(liveHTMLUpdate, 100);
     }
 
     // ----------------------------------------------------
@@ -4012,6 +4507,7 @@
       }
       
       wrapper.innerHTML = svgContent;
+      buildGateTruthTable(type);
     }
 
     // ----------------------------------------------------
@@ -4275,6 +4771,392 @@
       `;
     }
 
+    // ════════════════════════════════════════════════════════
+    // LAB: NUMBER SYSTEM CONVERTER + 2's COMPLEMENT
+    // ════════════════════════════════════════════════════════
+    function convertNumber() {
+      const raw = document.getElementById('num-input').value.trim();
+      const base = parseInt(document.getElementById('num-from-base').value);
+      if (!raw) { ['num-binary','num-octal','num-decimal','num-hex'].forEach(id => document.getElementById(id).textContent = '—'); return; }
+      const dec = parseInt(raw, base);
+      if (isNaN(dec) || dec < 0) {
+        ['num-binary','num-octal','num-decimal','num-hex'].forEach(id => document.getElementById(id).textContent = 'Invalid');
+        return;
+      }
+      document.getElementById('num-binary').textContent  = dec.toString(2);
+      document.getElementById('num-octal').textContent   = dec.toString(8);
+      document.getElementById('num-decimal').textContent = dec.toString(10);
+      document.getElementById('num-hex').textContent     = dec.toString(16).toUpperCase();
+    }
+
+    function calcTwosComplement() {
+      const raw = document.getElementById('twos-input').value.trim();
+      const bits = parseInt(document.getElementById('twos-bits').value);
+      const stepsEl = document.getElementById('twos-steps');
+      const resultEl = document.getElementById('twos-result');
+      if (!raw || raw === '-') { resultEl.textContent = '—'; stepsEl.style.display = 'none'; return; }
+      const dec = parseInt(raw, 10);
+      if (isNaN(dec)) { resultEl.textContent = 'Invalid'; stepsEl.style.display = 'none'; return; }
+      const maxPos = Math.pow(2, bits - 1) - 1;
+      const minNeg = -Math.pow(2, bits - 1);
+      if (dec > maxPos || dec < minNeg) {
+        resultEl.textContent = 'Out of range';
+        stepsEl.innerHTML = `<div class="twos-step" style="color:var(--color-error)">Range for ${bits}-bit: ${minNeg} to ${maxPos}</div>`;
+        stepsEl.style.display = 'flex';
+        return;
+      }
+      let steps = [], result;
+      if (dec >= 0) {
+        result = dec.toString(2).padStart(bits, '0');
+        steps = [
+          `<div class="twos-step">Decimal ${dec} is positive — direct binary conversion:</div>`,
+          `<div class="twos-step">${dec} → ${result}</div>`,
+          `<div class="twos-step step-result">Result (${bits}-bit): ${result}</div>`
+        ];
+      } else {
+        const absVal = Math.abs(dec);
+        const absBin = absVal.toString(2).padStart(bits, '0');
+        const onesComp = absBin.split('').map(b => b==='0'?'1':'0').join('');
+        const twosVal = (parseInt(onesComp, 2) + 1).toString(2).padStart(bits, '0');
+        result = twosVal;
+        steps = [
+          `<div class="twos-step">Step 1: |${dec}| = ${absVal} → Binary: ${absBin}</div>`,
+          `<div class="twos-step">Step 2: 1's complement (invert bits): ${onesComp}</div>`,
+          `<div class="twos-step">Step 3: Add 1: ${parseInt(onesComp,2)} + 1 = ${parseInt(twosVal,2)}</div>`,
+          `<div class="twos-step step-result">2's complement of ${dec} (${bits}-bit): ${twosVal}</div>`
+        ];
+      }
+      resultEl.textContent = result;
+      stepsEl.innerHTML = steps.join('');
+      stepsEl.style.display = 'flex';
+    }
+
+    // ════════════════════════════════════════════════════════
+    // LAB: TRUTH TABLE GENERATOR
+    // ════════════════════════════════════════════════════════
+    function setExpr(expr) {
+      document.getElementById('truth-expr').value = expr;
+      generateTruthTable();
+    }
+
+    class BoolParser {
+      constructor(tokens, vars) { this.tokens = tokens; this.pos = 0; this.vars = vars; }
+      peek() { return this.tokens[this.pos]; }
+      consume() { return this.tokens[this.pos++]; }
+      parse() { const v = this.parseOr(); return v & 1; }
+      parseOr() {
+        let left = this.parseAnd();
+        while (['OR','NOR','XOR','XNOR'].includes(this.peek())) {
+          const op = this.consume();
+          const right = this.parseAnd();
+          if (op === 'OR')   left = (left | right);
+          else if (op === 'NOR')  left = ~(left | right);
+          else if (op === 'XOR')  left = left ^ right;
+          else if (op === 'XNOR') left = ~(left ^ right);
+        }
+        return left & 1;
+      }
+      parseAnd() {
+        let left = this.parseNot();
+        while (['AND','NAND'].includes(this.peek())) {
+          const op = this.consume();
+          const right = this.parseNot();
+          if (op === 'AND')  left = left & right;
+          else if (op === 'NAND') left = ~(left & right);
+        }
+        return left & 1;
+      }
+      parseNot() {
+        if (this.peek() === 'NOT') { this.consume(); return (~this.parsePrimary()) & 1; }
+        return this.parsePrimary();
+      }
+      parsePrimary() {
+        const t = this.peek();
+        if (t === '(') {
+          this.consume(); const val = this.parseOr(); this.consume();
+          if (this.peek() === 'NOT_POST') { this.consume(); return (~val) & 1; }
+          return val & 1;
+        }
+        if (t === 0 || t === 1) { this.consume(); return t; }
+        if (typeof t === 'string' && /^[A-Z]$/.test(t)) {
+          this.consume();
+          let val = this.vars[t] !== undefined ? this.vars[t] : 0;
+          if (this.peek() === 'NOT_POST') { this.consume(); return (~val) & 1; }
+          return val & 1;
+        }
+        return 0;
+      }
+    }
+
+    function tokenizeBool(expr) {
+      const tokens = []; let i = 0;
+      const s = expr.toUpperCase().trim();
+      while (i < s.length) {
+        if (/\s/.test(s[i])) { i++; continue; }
+        if (s.startsWith('XNOR', i)) { tokens.push('XNOR'); i+=4; continue; }
+        if (s.startsWith('NAND', i)) { tokens.push('NAND'); i+=4; continue; }
+        if (s.startsWith('NOR', i))  { tokens.push('NOR');  i+=3; continue; }
+        if (s.startsWith('XOR', i))  { tokens.push('XOR');  i+=3; continue; }
+        if (s.startsWith('NOT', i))  { tokens.push('NOT');  i+=3; continue; }
+        if (s.startsWith('AND', i))  { tokens.push('AND');  i+=3; continue; }
+        if (s.startsWith('OR', i))   { tokens.push('OR');   i+=2; continue; }
+        if (/[A-D]/.test(s[i]))      { tokens.push(s[i]);   i++;  continue; }
+        if (s[i]==='(' || s[i]===')') { tokens.push(s[i]); i++; continue; }
+        if (s[i]==='0' || s[i]==='1') { tokens.push(parseInt(s[i])); i++; continue; }
+        if (s[i]==='.') { tokens.push('AND'); i++; continue; }
+        if (s[i]==='+') { tokens.push('OR');  i++; continue; }
+        if (s[i]==='!') { tokens.push('NOT'); i++; continue; }
+        if (s[i]==="'") { tokens.push('NOT_POST'); i++; continue; }
+        i++;
+      }
+      return tokens;
+    }
+
+    function generateTruthTable() {
+      const expr = document.getElementById('truth-expr').value.trim();
+      const errEl = document.getElementById('truth-error');
+      const container = document.getElementById('truth-table-container');
+      errEl.style.display = 'none'; container.innerHTML = '';
+      if (!expr) return;
+      // Detect variables: tokenize first so "AND"/"NAND" operators don't contribute A/D
+      const tokensForVars = tokenizeBool(expr);
+      const varsUsed = [...new Set(tokensForVars.filter(t => typeof t === 'string' && /^[A-D]$/.test(t)))].sort();
+      if (varsUsed.length === 0) { errEl.textContent = 'No variables found. Use A, B, C, or D.'; errEl.style.display='block'; return; }
+      if (varsUsed.length > 4)   { errEl.textContent = 'Maximum 4 variables (A, B, C, D).'; errEl.style.display='block'; return; }
+      const rows = Math.pow(2, varsUsed.length);
+      // Build table
+      let thead = '<tr>' + varsUsed.map(v=>`<th>${v}</th>`).join('') + `<th style="border-left:2px solid rgba(197,160,89,0.3)">${escapeHtml(expr.toUpperCase())}</th></tr>`;
+      let tbody = '';
+      for (let i = rows-1; i >= 0; i--) {
+        const varVals = {};
+        varsUsed.forEach((v, idx) => { varVals[v] = (i >> (varsUsed.length - 1 - idx)) & 1; });
+        let output;
+        try {
+          const tokens = tokenizeBool(expr);
+          const parser = new BoolParser(tokens, varVals);
+          output = parser.parse();
+        } catch(e) { errEl.textContent = 'Invalid expression. Check syntax.'; errEl.style.display='block'; return; }
+        const varCells = varsUsed.map(v => `<td class="${varVals[v]===1?'val-1':'val-0'}">${varVals[v]}</td>`).join('');
+        tbody += `<tr>${varCells}<td class="output-col ${output===1?'val-1':'val-0'}" style="border-left:2px solid rgba(197,160,89,0.3)">${output}</td></tr>`;
+      }
+      container.innerHTML = `<div class="truth-table-wrap"><table class="truth-table"><thead>${thead}</thead><tbody>${tbody}</tbody></table></div>`;
+    }
+
+    // ════════════════════════════════════════════════════════
+    // LAB: CPU SCHEDULING ALGORITHMS
+    // ════════════════════════════════════════════════════════
+    const SCHED_COLORS = ['#c5a059','#10b981','#3b82f6','#f59e0b','#8b5cf6','#ef4444','#06b6d4','#ec4899'];
+    let schedProcesses = [];
+    let schedPidCounter = 1;
+
+    function schedToggleQuantum() {
+      const algo = document.getElementById('sched-algo').value;
+      document.getElementById('sched-quantum-group').style.display = algo === 'rr' ? 'block' : 'none';
+    }
+
+    function schedAddProcess() {
+      const arrival  = parseInt(document.getElementById('sched-arrival').value)  || 0;
+      const burst    = parseInt(document.getElementById('sched-burst').value)    || 1;
+      const priority = parseInt(document.getElementById('sched-priority').value) || 1;
+      schedProcesses.push({ id: `P${schedPidCounter++}`, arrival, burst, priority, color: SCHED_COLORS[(schedPidCounter-2) % SCHED_COLORS.length] });
+      schedRenderProcessTable();
+      document.getElementById('sched-arrival').value = (arrival + burst).toString();
+    }
+
+    function schedLoadSample() {
+      schedProcesses = [
+        {id:'P1', arrival:0, burst:6, priority:2, color:SCHED_COLORS[0]},
+        {id:'P2', arrival:2, burst:4, priority:1, color:SCHED_COLORS[1]},
+        {id:'P3', arrival:4, burst:2, priority:3, color:SCHED_COLORS[2]},
+        {id:'P4', arrival:6, burst:5, priority:2, color:SCHED_COLORS[3]},
+      ];
+      schedPidCounter = 5;
+      schedRenderProcessTable();
+    }
+
+    function schedClearAll() {
+      schedProcesses = []; schedPidCounter = 1;
+      schedRenderProcessTable();
+      document.getElementById('sched-results').style.display = 'none';
+    }
+
+    function schedRemoveProcess(id) {
+      schedProcesses = schedProcesses.filter(p => p.id !== id);
+      schedRenderProcessTable();
+    }
+
+    function schedRenderProcessTable() {
+      const wrap = document.getElementById('sched-process-table-wrap');
+      const body = document.getElementById('sched-process-body');
+      if (schedProcesses.length === 0) { wrap.style.display='none'; return; }
+      wrap.style.display = 'block';
+      body.innerHTML = schedProcesses.map(p => `
+        <tr>
+          <td style="font-weight:700;color:${p.color}">${p.id}</td>
+          <td>${p.arrival}</td><td>${p.burst}</td><td>${p.priority}</td>
+          <td><button onclick="schedRemoveProcess('${p.id}')" style="background:none;border:none;color:var(--color-error);cursor:pointer;font-size:0.85rem;">✕</button></td>
+        </tr>`).join('');
+    }
+
+    function runScheduling() {
+      if (schedProcesses.length === 0) return;
+      const algo    = document.getElementById('sched-algo').value;
+      const quantum = parseInt(document.getElementById('sched-quantum').value) || 2;
+      let result;
+      if (algo === 'fcfs') result = schedFCFS(schedProcesses);
+      else if (algo === 'sjf') result = schedSJF(schedProcesses);
+      else result = schedRR(schedProcesses, quantum);
+      renderSchedResults(result);
+    }
+
+    function schedFCFS(procs) {
+      const sorted = [...procs].sort((a,b) => a.arrival - b.arrival || a.id.localeCompare(b.id));
+      let time = 0; const gantt = [], results = [];
+      sorted.forEach(p => {
+        if (time < p.arrival) { gantt.push({pid:'IDLE', start:time, end:p.arrival, color:'#374151'}); time = p.arrival; }
+        gantt.push({pid:p.id, start:time, end:time+p.burst, color:p.color});
+        const completion = time + p.burst;
+        results.push({...p, completion, turnaround: completion-p.arrival, waiting: completion-p.arrival-p.burst});
+        time += p.burst;
+      });
+      return {gantt, results};
+    }
+
+    function schedSJF(procs) {
+      let time = 0; const remaining = [...procs].map(p=>({...p})).sort((a,b)=>a.arrival-b.arrival);
+      const done = new Set(); const gantt = [], results = [];
+      while (done.size < procs.length) {
+        const avail = remaining.filter(p => !done.has(p.id) && p.arrival <= time);
+        if (avail.length === 0) {
+          const next = remaining.filter(p=>!done.has(p.id)).sort((a,b)=>a.arrival-b.arrival)[0];
+          if (next) { gantt.push({pid:'IDLE',start:time,end:next.arrival,color:'#374151'}); time=next.arrival; }
+          continue;
+        }
+        avail.sort((a,b) => a.burst - b.burst || a.arrival - b.arrival);
+        const p = avail[0]; done.add(p.id);
+        gantt.push({pid:p.id, start:time, end:time+p.burst, color:p.color});
+        const completion = time + p.burst;
+        results.push({...p, completion, turnaround:completion-p.arrival, waiting:completion-p.arrival-p.burst});
+        time += p.burst;
+      }
+      return {gantt, results};
+    }
+
+    function schedRR(procs, quantum) {
+      const queue = []; let i = 0; let time = 0;
+      const rem = procs.map(p=>({...p, rem:p.burst})).sort((a,b)=>a.arrival-b.arrival);
+      const completions = {}; const gantt = [];
+      while (i < rem.length && rem[i].arrival <= time) queue.push(rem[i++]);
+      while (queue.length > 0 || i < rem.length) {
+        if (queue.length === 0) { gantt.push({pid:'IDLE',start:time,end:rem[i].arrival,color:'#374151'}); time=rem[i].arrival; while(i<rem.length && rem[i].arrival<=time) queue.push(rem[i++]); continue; }
+        const p = queue.shift();
+        const exec = Math.min(quantum, p.rem);
+        gantt.push({pid:p.id, start:time, end:time+exec, color:p.color});
+        time += exec; p.rem -= exec;
+        while(i<rem.length && rem[i].arrival<=time) queue.push(rem[i++]);
+        if (p.rem > 0) queue.push(p);
+        else completions[p.id] = time;
+      }
+      const results = procs.map(p => ({ ...p, completion:completions[p.id], turnaround:completions[p.id]-p.arrival, waiting:completions[p.id]-p.arrival-p.burst }));
+      return {gantt, results};
+    }
+
+    function renderSchedResults({gantt, results}) {
+      const totalTime = gantt[gantt.length-1]?.end || 1;
+      const idleTime  = gantt.filter(g=>g.pid==='IDLE').reduce((s,g)=>s+(g.end-g.start),0);
+      // Gantt bar
+      const bar  = document.getElementById('sched-gantt-bar');
+      const timeRow = document.getElementById('sched-gantt-time');
+      bar.innerHTML = gantt.map(g => {
+        const w = ((g.end - g.start) / totalTime * 100).toFixed(1);
+        return `<div class="sched-gantt-slice" style="flex:${g.end-g.start};background:${g.color}" title="${g.pid}: t=${g.start}–${g.end}">${g.end-g.start>=2?g.pid:''}</div>`;
+      }).join('');
+      // Time ticks
+      const ticks = [...new Set(gantt.flatMap(g=>[g.start,g.end]))].sort((a,b)=>a-b);
+      timeRow.innerHTML = `<div style="display:flex;width:100%;font-size:0.65rem;color:var(--text-muted);font-family:'JetBrains Mono',monospace;margin-top:2px;">${ticks.map((t,i,arr)=>{const flex=i<arr.length-1?arr[i+1]-t:1;return `<div style="flex:${flex};text-align:left;">${t}</div>`}).join('')}</div>`;
+      // Results table
+      document.getElementById('sched-results-body').innerHTML = results.map(r =>
+        `<tr><td style="font-weight:700;color:${r.color}">${r.id}</td><td>${r.arrival}</td><td>${r.burst}</td><td>${r.completion}</td><td style="color:var(--accent-secondary)">${r.turnaround}</td><td style="color:var(--color-success)">${r.waiting}</td></tr>`
+      ).join('');
+      const avgWT  = (results.reduce((s,r)=>s+r.waiting,0)/results.length).toFixed(2);
+      const avgTAT = (results.reduce((s,r)=>s+r.turnaround,0)/results.length).toFixed(2);
+      const util   = (((totalTime-idleTime)/totalTime)*100).toFixed(1) + '%';
+      document.getElementById('sched-avg-wt').textContent  = avgWT;
+      document.getElementById('sched-avg-tat').textContent = avgTAT;
+      document.getElementById('sched-cpu-util').textContent = util;
+      document.getElementById('sched-results').style.display = 'block';
+    }
+
+    // ════════════════════════════════════════════════════════
+    // LAB: HTML/CSS LIVE EDITOR
+    // ════════════════════════════════════════════════════════
+    let htmlUpdateTimer = null;
+    function liveHTMLUpdate() {
+      clearTimeout(htmlUpdateTimer);
+      htmlUpdateTimer = setTimeout(runHTMLPreview, 600);
+    }
+
+    function runHTMLPreview() {
+      const html = document.getElementById('html-editor').value;
+      const css  = document.getElementById('css-editor').value;
+      const frame = document.getElementById('html-preview');
+      frame.srcdoc = `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>${css}</style></head><body>${html}</body></html>`;
+    }
+
+    function clearHTMLEditor() {
+      document.getElementById('html-editor').value = '';
+      document.getElementById('css-editor').value = '';
+      runHTMLPreview();
+    }
+
+    function loadHTMLSample(type) {
+      const samples = {
+        basic: {
+          html: `<h1>My Web Page</h1>\n<p>This is a <strong>paragraph</strong> with <em>italic</em> text.</p>\n<a href="#">Click here</a>\n<hr>\n<ul>\n  <li>Item 1</li>\n  <li>Item 2</li>\n  <li>Item 3</li>\n</ul>`,
+          css:  `body { font-family: Arial, sans-serif; padding: 20px; background: #f0f4f8; }\nh1 { color: #1a3c5e; border-bottom: 2px solid #3498db; }\np { color: #444; line-height: 1.6; }\na { color: #3498db; }\nli { margin: 5px 0; }`
+        },
+        table: {
+          html: `<h2>Student Results</h2>\n<table>\n  <thead>\n    <tr><th>Name</th><th>Subject</th><th>Grade</th></tr>\n  </thead>\n  <tbody>\n    <tr><td>Abiraj</td><td>ICT</td><td>A</td></tr>\n    <tr><td>Nimal</td><td>ICT</td><td>B</td></tr>\n    <tr><td>Kamala</td><td>ICT</td><td>A+</td></tr>\n  </tbody>\n</table>`,
+          css:  `body { font-family: Arial, sans-serif; padding: 20px; }\ntable { border-collapse: collapse; width: 100%; }\nth, td { border: 1px solid #ddd; padding: 10px 14px; text-align: left; }\nth { background: #2c3e50; color: white; }\ntr:nth-child(even) { background: #f2f2f2; }\ntr:hover { background: #ddf; }`
+        },
+        form: {
+          html: `<h2>Contact Form</h2>\n<form>\n  <label>Name:<br><input type="text" placeholder="Your name"></label><br><br>\n  <label>Email:<br><input type="email" placeholder="your@email.com"></label><br><br>\n  <label>Message:<br><textarea rows="4" placeholder="Write here..."></textarea></label><br><br>\n  <button type="submit">Send Message</button>\n</form>`,
+          css:  `body { font-family: Arial, sans-serif; padding: 20px; max-width: 400px; }\ninput, textarea { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }\nbutton { background: #27ae60; color: white; padding: 10px 24px; border: none; border-radius: 4px; cursor: pointer; }\nbutton:hover { background: #219a52; }`
+        }
+      };
+      const s = samples[type];
+      if (s) {
+        document.getElementById('html-editor').value = s.html;
+        document.getElementById('css-editor').value  = s.css;
+        runHTMLPreview();
+      }
+    }
+
+    // ════════════════════════════════════════════════════════
+    // ENHANCE: Logic Gate — draw truth table below gate
+    // ════════════════════════════════════════════════════════
+    function buildGateTruthTable(type) {
+      const tableEl = document.getElementById('gate-truth-table');
+      if (!tableEl) return;
+      const isUnary = type === 'NOT';
+      let thead, rows;
+      if (isUnary) {
+        thead = '<tr><th>A</th><th>Q (NOT A)</th></tr>';
+        rows = [[0,1],[1,0]];
+      } else {
+        const opFn = {
+          AND:  (a,b)=>a&b, OR: (a,b)=>a|b, NAND: (a,b)=>~(a&b)&1,
+          NOR:  (a,b)=>~(a|b)&1, XOR:  (a,b)=>a^b
+        }[type] || ((a,b)=>0);
+        thead = `<tr><th>A</th><th>B</th><th>Q (${type})</th></tr>`;
+        rows = [[0,0],[0,1],[1,0],[1,1]].map(([a,b])=>[a,b,opFn(a,b)]);
+      }
+      const tbody = rows.map(r => {
+        const cells = r.map((v,i)=>`<td class="${v===1?'val-1':'val-0'}${i===r.length-1?' output-col':''}">${v}</td>`).join('');
+        return `<tr>${cells}</tr>`;
+      }).join('');
+      tableEl.innerHTML = `<thead>${thead}</thead><tbody>${tbody}</tbody>`;
+    }
     function escapeHtml(unsafe) {
       if (!unsafe) return "";
       return unsafe

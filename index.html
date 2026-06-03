@@ -1,4 +1,12 @@
-﻿<!DOCTYPE html>
+﻿<!--
+  ╔══════════════════════════════════════════════════════════════╗
+  ║   G.C.E. A/L ICT Interactive Learning Portal                ║
+  ║   Copyright © 2025 J. Abiraj. All Rights Reserved.          ║
+  ║   BSc(Hons) Computer Science                                 ║
+  ║   Unauthorised copying or redistribution is prohibited.      ║
+  ╚══════════════════════════════════════════════════════════════╝
+-->
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -2089,6 +2097,198 @@
       box-shadow: 0 2px 12px var(--accent-glow);
     }
     
+    /* ── Back to Top button ── */
+    .back-to-top {
+      position: fixed;
+      bottom: 5rem;
+      right: 1.5rem;
+      z-index: 300;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: rgba(14,17,23,0.9);
+      border: 1px solid var(--border-glass);
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-smooth);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    }
+    .back-to-top:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      transform: translateY(-2px);
+    }
+    .back-to-top.visible { display: flex; }
+
+    /* ── Share button ── */
+    .share-btn {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      border: 1px solid var(--border-glass);
+      color: var(--text-muted);
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 600;
+      transition: var(--transition-smooth);
+      white-space: nowrap;
+    }
+    .share-btn:hover {
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      background: var(--accent-glow);
+    }
+    .share-toast {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(16,185,129,0.15);
+      border: 1px solid var(--color-success);
+      color: var(--color-success);
+      padding: 0.6rem 1.4rem;
+      border-radius: 99px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      opacity: 0;
+      transition: all 0.3s ease;
+      pointer-events: none;
+      z-index: 500;
+    }
+    .share-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ── Quiz results summary modal ── */
+    .results-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      backdrop-filter: blur(8px);
+      z-index: 600;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      animation: fadeIn 0.3s ease;
+    }
+    .results-overlay.open { display: flex; }
+
+    .results-modal {
+      background: rgba(12,15,20,0.98);
+      border: 1px solid var(--border-glass);
+      border-radius: 24px;
+      padding: 2.5rem;
+      max-width: 540px;
+      width: 100%;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.7);
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .results-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .results-emoji { font-size: 3rem; margin-bottom: 0.5rem; }
+    .results-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text-bright);
+      margin-bottom: 0.3rem;
+    }
+    .results-subtitle { font-size: 0.88rem; color: var(--text-muted); }
+
+    .results-score-ring {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid var(--accent-primary);
+      margin: 0 auto 2rem;
+      box-shadow: 0 0 30px var(--accent-glow);
+      background: rgba(197,160,89,0.06);
+    }
+    .results-score-num {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent-secondary);
+      line-height: 1;
+    }
+    .results-score-denom {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 0.2rem;
+    }
+    .results-accuracy {
+      text-align: center;
+      font-size: 1rem;
+      color: var(--text-muted);
+      margin-bottom: 1.8rem;
+    }
+    .results-accuracy strong { color: var(--color-success); font-size: 1.15rem; }
+
+    .results-topic-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-bottom: 2rem;
+    }
+    .results-topic-row { display: flex; flex-direction: column; gap: 0.3rem; }
+    .results-topic-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .results-topic-info span:last-child { color: var(--text-main); font-weight: 600; }
+    .results-bar-bg {
+      height: 6px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .results-bar-fill {
+      height: 100%;
+      border-radius: 99px;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      transition: width 0.8s ease;
+    }
+
+    .results-actions {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .results-actions .btn-premium { flex: 1; justify-content: center; }
+
+    /* ── Progress saved indicator ── */
+    .progress-saved-badge {
+      display: none;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.7rem;
+      color: var(--color-success);
+      background: rgba(16,185,129,0.08);
+      border: 1px solid rgba(16,185,129,0.2);
+      padding: 0.25rem 0.65rem;
+      border-radius: 99px;
+    }
+    .progress-saved-badge.show { display: flex; }
+
     /* ----------------------------------------------------
        RESPONSIVE MEDIA QUERIES (COMPLETE SYSTEM)
        ---------------------------------------------------- */
@@ -2443,6 +2643,33 @@
   <!-- Sidebar Overlay for Mobile nav closure -->
   <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleMobileMenu()"></div>
 
+  <!-- Back to Top button -->
+  <button class="back-to-top" id="back-to-top" onclick="scrollToTop()" title="Back to top">↑</button>
+
+  <!-- Share toast notification -->
+  <div class="share-toast" id="share-toast">✓ Link copied to clipboard!</div>
+
+  <!-- Quiz Results Summary Modal -->
+  <div class="results-overlay" id="results-overlay">
+    <div class="results-modal">
+      <div class="results-header">
+        <div class="results-emoji" id="results-emoji">🎉</div>
+        <div class="results-title" id="results-title">Quiz Complete!</div>
+        <div class="results-subtitle" id="results-subtitle"></div>
+      </div>
+      <div class="results-score-ring">
+        <div class="results-score-num" id="results-score-num">0</div>
+        <div class="results-score-denom" id="results-score-denom">/ 0 correct</div>
+      </div>
+      <div class="results-accuracy" id="results-accuracy"></div>
+      <div class="results-topic-list" id="results-topic-list"></div>
+      <div class="results-actions">
+        <button class="btn-premium btn-outline" onclick="closeResults()">✕ Close &amp; Review</button>
+        <button class="btn-premium" onclick="restartQuiz()">↺ Restart Quiz</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Mobile Top Header Bar -->
   <header class="mobile-header">
     <button class="menu-toggle" onclick="toggleMobileMenu()">☰</button>
@@ -2563,6 +2790,13 @@
           <div class="welcome-banner-left">
             <div class="welcome-banner-title">🎯 G.C.E. A/L ICT Exam Center</div>
             <div class="welcome-banner-sub">Curated by <strong>J. Abiraj</strong> &mdash; ICT Educator &amp; Content Creator &bull; BSc(Hons) CS</div>
+          <div style="margin-top:0.4rem; font-size:0.72rem; color:rgba(239,68,68,0.8); display:flex; align-items:center; gap:0.4rem;">
+            <span>⚠️</span> Answer keys are best estimates — always verify with official DOE answer sheets.
+          </div>
+          <div style="margin-top:0.7rem; display:flex; align-items:center; gap:0.8rem; flex-wrap:wrap;">
+            <button class="share-btn" onclick="sharesite()">🔗 Share this site</button>
+            <span class="progress-saved-badge" id="progress-saved-badge">✓ Progress saved</span>
+          </div>
           </div>
           <div class="welcome-stats-row">
             <div class="w-stat">
@@ -2666,7 +2900,8 @@
             <div class="navigation-controls">
               <button id="quiz-prev-btn" class="btn-premium btn-outline" onclick="navigateQuiz(-1)">← Previous</button>
               <button id="quiz-reset-btn" class="btn-premium btn-outline" onclick="resetQuizScore()">Reset Score</button>
-              <button id="quiz-next-btn" class="btn-premium" onclick="navigateQuiz(1)">Next Question →</button>
+              <button id="quiz-next-btn" class="btn-premium" onclick="navigateQuiz(1)">Next →</button>
+              <button class="btn-premium" onclick="showResults()" style="background:rgba(197,160,89,0.15);color:var(--accent-primary-hover);border:1px solid rgba(197,160,89,0.3);box-shadow:none;" title="View full results summary">📊 Results</button>
             </div>
           </div>
           
@@ -3031,19 +3266,22 @@
         alert("Warning: data.js file is missing. Please build the database by running build_data.py first.");
         return;
       }
-      
+
+      // Load saved quiz progress from previous session
+      loadProgress();
+
       // Initialize tabs
       switchTab('exam-center');
-      
+
       // Initialize filters
       loadQuestions();
-      
+
       // Initialize lesson list
       loadLessonsSidebar();
-      
+
       // Initialize logic gate
       calculateGateOutput();
-      
+
       // Initialize Subnet calculator
       calculateSubnet();
     });
@@ -4046,6 +4284,157 @@
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
     }
+
+    // ────────────────────────────────────────────────────────
+    // FEATURE 1: SAVE PROGRESS TO LOCALSTORAGE
+    // ────────────────────────────────────────────────────────
+    const STORAGE_KEY = 'alict_quiz_answers_v1';
+
+    function saveProgress() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(state.quizAnswers));
+        const badge = document.getElementById('progress-saved-badge');
+        if (badge) {
+          badge.classList.add('show');
+          clearTimeout(badge._timer);
+          badge._timer = setTimeout(() => badge.classList.remove('show'), 2500);
+        }
+      } catch(e) {}
+    }
+
+    function loadProgress() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          state.quizAnswers = JSON.parse(saved);
+          recalculateScore();
+        }
+      } catch(e) {}
+    }
+
+    // ────────────────────────────────────────────────────────
+    // FEATURE 2: SHARE BUTTON
+    // ────────────────────────────────────────────────────────
+    function sharesite() {
+      const url = window.location.href;
+      if (navigator.share) {
+        navigator.share({ title: 'AL ICT Hub — Free Study Portal', url });
+      } else {
+        navigator.clipboard.writeText(url).then(() => {
+          const toast = document.getElementById('share-toast');
+          toast.classList.add('show');
+          setTimeout(() => toast.classList.remove('show'), 2500);
+        }).catch(() => {
+          prompt('Copy this link:', url);
+        });
+      }
+    }
+
+    // ────────────────────────────────────────────────────────
+    // FEATURE 3: BACK TO TOP
+    // ────────────────────────────────────────────────────────
+    function scrollToTop() {
+      document.querySelector('main').scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.querySelector('main').addEventListener('scroll', function() {
+      const btn = document.getElementById('back-to-top');
+      if (this.scrollTop > 300) btn.classList.add('visible');
+      else btn.classList.remove('visible');
+    });
+
+    // ────────────────────────────────────────────────────────
+    // FEATURE 4: QUIZ RESULTS SUMMARY
+    // ────────────────────────────────────────────────────────
+    function showResults() {
+      const qs = state.quizFilteredQuestions;
+      if (qs.length === 0) return;
+
+      const answered = qs.filter(q => state.quizAnswers[q.key]);
+      const correct  = answered.filter(q => state.quizAnswers[q.key]?.isCorrect);
+      const total    = qs.length;
+      const accuracy = answered.length > 0 ? Math.round((correct.length / answered.length) * 100) : 0;
+
+      // Emoji based on score
+      let emoji = '📚', title = 'Keep Practising!';
+      if (accuracy >= 80) { emoji = '🎉'; title = 'Excellent Work!'; }
+      else if (accuracy >= 60) { emoji = '👍'; title = 'Good Effort!'; }
+      else if (accuracy >= 40) { emoji = '📖'; title = 'Keep Studying!'; }
+
+      document.getElementById('results-emoji').textContent  = emoji;
+      document.getElementById('results-title').textContent  = title;
+      document.getElementById('results-subtitle').textContent =
+        `${answered.length} of ${total} questions answered`;
+      document.getElementById('results-score-num').textContent  = correct.length;
+      document.getElementById('results-score-denom').textContent = `/ ${answered.length} correct`;
+      document.getElementById('results-accuracy').innerHTML =
+        `Accuracy: <strong>${accuracy}%</strong>`;
+
+      // Topic breakdown
+      const topicMap = {};
+      qs.forEach(q => {
+        if (!topicMap[q.topic]) topicMap[q.topic] = { total: 0, correct: 0 };
+        topicMap[q.topic].total++;
+        const ans = state.quizAnswers[q.key];
+        if (ans?.isCorrect) topicMap[q.topic].correct++;
+      });
+
+      const list = document.getElementById('results-topic-list');
+      list.innerHTML = Object.entries(topicMap)
+        .sort((a,b) => b[1].total - a[1].total)
+        .map(([topic, data]) => {
+          const pct = data.total > 0 ? Math.round((data.correct / data.total) * 100) : 0;
+          const color = pct >= 70 ? 'var(--color-success)' : pct >= 40 ? 'var(--accent-primary)' : 'var(--color-error)';
+          return `
+            <div class="results-topic-row">
+              <div class="results-topic-info">
+                <span>${topic}</span>
+                <span style="color:${color}">${data.correct}/${data.total}</span>
+              </div>
+              <div class="results-bar-bg">
+                <div class="results-bar-fill" style="width:${pct}%; background:${color}"></div>
+              </div>
+            </div>`;
+        }).join('');
+
+      document.getElementById('results-overlay').classList.add('open');
+    }
+
+    function closeResults() {
+      document.getElementById('results-overlay').classList.remove('open');
+    }
+
+    function restartQuiz() {
+      closeResults();
+      resetQuizScore();
+      state.quizIndex = 0;
+      renderQuizQuestion();
+    }
+
+    // Close results modal on overlay click
+    document.getElementById('results-overlay').addEventListener('click', function(e) {
+      if (e.target === this) closeResults();
+    });
+
+    // ────────────────────────────────────────────────────────
+    // PATCH: save progress on every answer & reset
+    // ────────────────────────────────────────────────────────
+    const _origSubmit = submitQuizAnswer;
+    submitQuizAnswer = function(question, selectedIndex) {
+      _origSubmit(question, selectedIndex);
+      saveProgress();
+      // Auto-show results when last question answered
+      const allAnswered = state.quizFilteredQuestions.every(q => state.quizAnswers[q.key]);
+      if (allAnswered && state.quizFilteredQuestions.length > 0) {
+        setTimeout(showResults, 400);
+      }
+    };
+
+    const _origReset = resetQuizScore;
+    resetQuizScore = function() {
+      _origReset();
+      saveProgress();
+    };
   </script>
 </body>
 </html>

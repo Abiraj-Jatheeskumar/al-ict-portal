@@ -520,7 +520,9 @@
     main {
       padding: 2.5rem 3.5rem;
       overflow-y: auto;
+      overflow-x: hidden;
       max-height: 100vh;
+      min-width: 0;
     }
 
     
@@ -964,6 +966,8 @@
       grid-template-columns: 210px 1fr;
       gap: 1.4rem;
       align-items: start;
+      min-width: 0;
+      width: 100%;
     }
 
     /* Left panel: Units + TOC stacked vertically */
@@ -976,8 +980,16 @@
       max-height: calc(100vh - 3rem);
       overflow-y: auto;
       scrollbar-width: none;
+      min-width: 0;
     }
     .lesson-left-panel::-webkit-scrollbar { display: none; }
+
+    /* Prevent lesson body from overflowing grid */
+    .lesson-body-card {
+      min-width: 0;
+      width: 100%;
+      overflow: hidden;
+    }
 
     /* TOC inside left panel */
     #lesson-notes .lesson-toc-card {
@@ -2766,8 +2778,10 @@
       .lesson-left-panel {
         position: static;
         max-height: none;
-        overflow: visible;
+        overflow: hidden;
         gap: 0.5rem;
+        min-width: 0;
+        width: 100%;
       }
 
       #lesson-notes .lesson-toc-card { display: none !important; }
@@ -2776,11 +2790,13 @@
       .lessons-sidebar {
         flex-direction: row !important;
         overflow-x: auto;
+        overflow-y: hidden;
         white-space: nowrap;
         padding: 0.5rem 0.6rem;
         gap: 0.5rem;
         border-radius: 12px;
         scrollbar-width: none;
+        max-width: 100%;
       }
       .lessons-sidebar::-webkit-scrollbar { display: none; }
 

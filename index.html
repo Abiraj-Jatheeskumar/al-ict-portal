@@ -269,6 +269,15 @@
       font-size: 1.3rem;
       color: var(--accent-primary);
       letter-spacing: -1px;
+      overflow: hidden;
+    }
+
+    .creator-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
     }
 
     .creator-name {
@@ -2439,7 +2448,9 @@
         <div class="creator-card-inner">
           <div class="creator-avatar-wrap">
             <div class="creator-avatar-ring"></div>
-            <div class="creator-avatar">JA</div>
+            <div class="creator-avatar">
+            <img src="photo.png" alt="J. Abiraj" onerror="this.style.display='none';this.parentNode.innerText='JA'">
+          </div>
           </div>
           <div class="creator-name">J. Abiraj</div>
           <div class="creator-role">ICT Educator &amp; Content Creator</div>
@@ -3081,11 +3092,10 @@
       });
       
       state.quizFilteredQuestions = filtered;
-      
+
       if (state.mode === 'quiz') {
-        if (state.quizIndex >= filtered.length) {
-          state.quizIndex = 0;
-        }
+        // Always restart from Q1 when filters change so position matches the new set
+        state.quizIndex = 0;
         renderQuizQuestion();
       } else {
         renderStudySheet();
